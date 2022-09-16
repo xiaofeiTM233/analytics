@@ -137,7 +137,6 @@ PlausibleWeb.Tracker.html
 PlausibleWeb.UnsubscribeController.html
 PlausibleWeb.UnsubscribeView.html
 PlausibleWeb.html
-account-locking.html
 api-reference.html
 assets/logo.png
 dist/app-b5f3440501744dc8be3d.js
@@ -148,8 +147,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-422516b39f.js
-dist/sidebar_items-3ad0840957.js
+dist/search_items-949e5a35d1.js
+dist/sidebar_items-3d0b74645e.js
 index.html
 readme.html
 search.html
