@@ -10,7 +10,7 @@
     <title>Plausible.Billing.Plans — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-3312518fca.js"></script>
+    <script src="dist/sidebar_items-a5ba4afbd6.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -121,6 +121,21 @@ Plausible
       Summary
     </h1>
 
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:plan/0" translate="no">plan()</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -152,14 +167,6 @@ Plausible
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get_enterprise_plan/1" translate="no">get_enterprise_plan(subscription)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
           <a href="#plans_for/1" translate="no">plans_for(user)</a>
 
         </div>
@@ -176,7 +183,7 @@ Plausible
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#suggested_plan/2" translate="no">suggested_plan(user, usage)</a>
+          <a href="#suggested_plan/2" translate="no">suggested_plan(user, usage_during_cycle)</a>
 
         </div>
 
@@ -186,6 +193,55 @@ Plausible
 
   </section>
 
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Types
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:plan/0">
+
+  <div class="detail-header">
+    <a href="#t:plan/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">plan()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L29" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> plan() ::
+  %{
+    limit: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>(),
+    monthly_product_id: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+    yearly_product_id: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+    monthly_cost: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+    yearly_cost: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+  }
+  | :enterprise</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -205,7 +261,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">all_yearly_plan_ids()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L61" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L71" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -227,7 +283,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">allowance(subscription)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L90" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L100" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -249,29 +305,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">for_product_id(product_id)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L65" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="get_enterprise_plan/1">
-
-  <div class="detail-header">
-    <a href="#get_enterprise_plan/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get_enterprise_plan(subscription)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L112" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L75" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -293,7 +327,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">plans_for(user)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L39" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -315,7 +349,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">subscription_interval(subscription)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L71" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L81" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -335,9 +369,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">suggested_plan(user, usage)</h1>
+    <h1 class="signature" translate="no">suggested_plan(user, usage_during_cycle)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L119" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/plans.ex#L131" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -346,6 +380,12 @@ Functions
   </div>
 
   <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> suggested_plan(<a href="Plausible.Auth.User.html#t:t/0">Plausible.Auth.User.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()) :: <a href="#t:plan/0">plan</a>()</pre>
+
+      </div>
 
 
   </section>

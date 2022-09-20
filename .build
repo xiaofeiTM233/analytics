@@ -138,8 +138,10 @@ PlausibleWeb.Tracker.html
 PlausibleWeb.UnsubscribeController.html
 PlausibleWeb.UnsubscribeView.html
 PlausibleWeb.html
+account-locking.html
 api-reference.html
 assets/logo.png
+contributing.html
 dist/app-b5f3440501744dc8be3d.js
 dist/app-b5f3440501744dc8be3d.js.LICENSE.txt
 dist/elixir-64c5e2b63575bddb1c5b.css
@@ -148,8 +150,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-900af4e689.js
-dist/sidebar_items-3312518fca.js
+dist/search_items-eb3da4d17a.js
+dist/sidebar_items-a5ba4afbd6.js
 index.html
 readme.html
 search.html

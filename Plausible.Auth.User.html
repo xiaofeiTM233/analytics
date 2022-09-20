@@ -10,7 +10,7 @@
     <title>Plausible.Auth.User — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-3312518fca.js"></script>
+    <script src="dist/sidebar_items-a5ba4afbd6.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -100,7 +100,7 @@ Plausible
 </button>
 
 
-    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L23" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L13" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
@@ -121,6 +121,21 @@ Plausible
       Summary
     </h1>
 
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:t/0" translate="no">t()</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -129,14 +144,6 @@ Plausible
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#changeset/2" translate="no">changeset(user, attrs \\ %{})</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#end_grace_period/1" translate="no">end_grace_period(user)</a>
 
         </div>
 
@@ -168,14 +175,6 @@ Plausible
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#remove_grace_period/1" translate="no">remove_grace_period(user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
           <a href="#remove_trial_expiry/1" translate="no">remove_trial_expiry(user)</a>
 
         </div>
@@ -185,14 +184,6 @@ Plausible
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#set_password/2" translate="no">set_password(user, password)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#start_grace_period/2" translate="no">start_grace_period(user, allowance_required)</a>
 
         </div>
 
@@ -210,6 +201,68 @@ Plausible
 
   </section>
 
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Types
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:t/0">
+
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">t()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L17" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> t() :: %Plausible.Auth.User{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  api_keys: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  email: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  email_verified: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  enterprise_plan: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  google_auth: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  grace_period: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  last_seen: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  password: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  password_confirmation: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  password_hash: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  site_memberships: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  sites: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  subscription: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  theme: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  trial_expiry_date: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -231,29 +284,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">changeset(user, attrs \\ %{})</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L63" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="end_grace_period/1">
-
-  <div class="detail-header">
-    <a href="#end_grace_period/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">end_grace_period(user)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L109" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L55" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -275,7 +306,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">end_trial(user)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L95" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L87" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -297,7 +328,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">hash_password(changeset)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L80" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L72" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -321,29 +352,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">new(attrs \\ %{})</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L50" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="remove_grace_period/1">
-
-  <div class="detail-header">
-    <a href="#remove_grace_period/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">remove_grace_period(user)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L113" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L42" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -365,7 +374,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">remove_trial_expiry(user)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L79" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -387,29 +396,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">set_password(user, password)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L70" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="start_grace_period/2">
-
-  <div class="detail-header">
-    <a href="#start_grace_period/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">start_grace_period(user, allowance_required)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L99" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L62" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -431,7 +418,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">start_trial(user)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L91" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/auth/user.ex#L83" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
