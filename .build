@@ -66,6 +66,7 @@ Plausible.Stats.Breakdown.html
 Plausible.Stats.Clickhouse.html
 Plausible.Stats.Compare.html
 Plausible.Stats.CurrentVisitors.html
+Plausible.Stats.FilterParser.html
 Plausible.Stats.FilterSuggestions.html
 Plausible.Stats.Filters.html
 Plausible.Stats.Fragments.html
@@ -151,8 +152,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-66d629d6f1.js
-dist/sidebar_items-e90b1aece3.js
+dist/search_items-f5c04f474f.js
+dist/sidebar_items-d17a8e8de8.js
 index.html
 readme.html
 search.html
