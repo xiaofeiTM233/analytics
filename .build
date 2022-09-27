@@ -5,6 +5,7 @@ Mix.Tasks.CreateFreeSubscription.html
 Mix.Tasks.DownloadCountryDatabase.html
 Mix.Tasks.GenerateReferrerFavicons.html
 Mix.Tasks.PullSandboxSubscription.html
+Mix.Tasks.SendPageview.html
 ObanErrorReporter.html
 Plausible.Auth.ApiKey.html
 Plausible.Auth.ApiKeyAdmin.html
@@ -152,8 +153,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-f5c04f474f.js
-dist/sidebar_items-d17a8e8de8.js
+dist/search_items-d771e356c3.js
+dist/sidebar_items-b200817d5a.js
 index.html
 readme.html
 search.html
