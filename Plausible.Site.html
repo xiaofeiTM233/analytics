@@ -10,7 +10,7 @@
     <title>Plausible.Site — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-6594812022.js"></script>
+    <script src="dist/sidebar_items-9be733948c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -162,6 +162,18 @@ Plausible
           <a href="#import_success/1" translate="no">import_success(site)</a>
 
         </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#local_start_date/1" translate="no">local_start_date(site)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns the date of the first recorded stat in the timezone configured by the user.
+This function does 2 transformations:
+  UTC %NaiveDateTime{} -&gt; Local %DateTime{} -&gt; Local %Date</p></div>
 
       </div>
 
@@ -353,6 +365,45 @@ Functions
   <section class="docstring">
 
 
+  </section>
+</section>
+<section class="detail" id="local_start_date/1">
+
+  <div class="detail-header">
+    <a href="#local_start_date/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">local_start_date(site)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/schema.ex#L126" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Returns the date of the first recorded stat in the timezone configured by the user.
+This function does 2 transformations:
+  UTC %NaiveDateTime{} -&gt; Local %DateTime{} -&gt; Local %Date</p><h2 id="local_start_date/1-examples" class="section-heading">
+  <a href="#local_start_date/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<p>  iex&gt; Plausible.Site.local_start_date(%Plausible.Site{stats_start_date: nil})
+  nil</p><p>  iex&gt; utc_start = ~N[2022-09-28 00:00:00]
+  iex&gt; tz = &quot;Europe/Helsinki&quot;
+  iex&gt; site = %Plausible.Site{stats_start_date: utc_start, timezone: tz}
+  iex&gt; Plausible.Site.local_start_date(site)
+  ~D[2022-09-28]</p><p>  iex&gt; utc_start = ~N[2022-09-28 00:00:00]
+  iex&gt; tz = &quot;America/Los_Angeles&quot;
+  iex&gt; site = %Plausible.Site{stats_start_date: utc_start, timezone: tz}
+  iex&gt; Plausible.Site.local_start_date(site)
+  ~D[2022-09-27]</p>
   </section>
 </section>
 <section class="detail" id="make_private/1">
