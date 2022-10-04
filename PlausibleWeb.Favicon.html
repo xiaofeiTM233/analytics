@@ -183,7 +183,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">call(conn, list)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible_web/plugs/favicon.ex#L57" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible_web/plugs/favicon.ex#L61" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -196,7 +196,9 @@ Functions
 <p>Proxies HTTP request to DuckDuckGo favicon service. Swallows hop-by-hop HTTP headers that
 should not be forwarded as defined in RFC 2616 (<a href="https://www.rfc-editor.org/rfc/rfc2616#section-13.5.1">https://www.rfc-editor.org/rfc/rfc2616#section-13.5.1</a>)</p><p>Cases where we show a placeholder icon instead:</p><ul><li>In case of network error to DuckDuckGo</li><li>In case of non-2xx status code from DuckDuckGo</li><li>In case of broken image response body from DuckDuckGo</li></ul><p>I'm not sure why DDG sometimes returns a broken PNG image in their response but we filter that out.
 When the icon request fails, we show a placeholder favicon instead. The placeholder is an emoji
-from <a href="https://favicon.io/emoji-favicons/">https://favicon.io/emoji-favicons/</a></p>
+from <a href="https://favicon.io/emoji-favicons/">https://favicon.io/emoji-favicons/</a></p><p>DuckDuckGo favicon service has some issues with <a href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">svg favicons</a>.
+For some reason, they return them with <code class="inline">content-type=image/x-icon</code> whereas SVG icons should be returned with <code class="inline">content-type=image/svg+xml</code>.
+This plug detects when the response body starts with &lt;svg and will override the content-type to correct it.</p>
   </section>
 </section>
 <section class="detail" id="init/1">
