@@ -43,6 +43,7 @@ Plausible.Ingestion.Request.html
 Plausible.Mailer.html
 Plausible.PromEx.Plugins.PlausibleMetrics.html
 Plausible.PromEx.html
+Plausible.Purge.html
 Plausible.Release.html
 Plausible.Repo.html
 Plausible.Sentry.Client.html
@@ -153,8 +154,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-2bb7869bd8.js
-dist/sidebar_items-0c15b64500.js
+dist/search_items-17ff1bd635.js
+dist/sidebar_items-e475054140.js
 index.html
 readme.html
 search.html

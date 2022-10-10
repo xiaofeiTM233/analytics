@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.28.5">
     <meta name="project" content="Plausible v0.0.1">
 
-    <title>Plausible.Billing.Subscription — Plausible v0.0.1</title>
+    <title>Plausible.Purge — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
     <script src="dist/sidebar_items-e475054140.js"></script>
@@ -100,16 +100,22 @@ Plausible
 </button>
 
 
-    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/subscription.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/purge.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Plausible.Billing.Subscription</span> 
+  <span translate="no">Plausible.Purge</span> 
   <small class="app-vsn" translate="no">(Plausible v0.0.1)</small>
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>Deletes data from a site.</p><p>Stats are stored on Clickhouse, and unlike other databases data deletion is
+done asynchronously.</p><ul><li><a href="https://clickhouse.com/docs/en/sql-reference/statements/alter/delete">Clickhouse <code class="inline">ALTER TABLE ... DELETE</code> Statement`</a>
+- <a href="https://clickhouse.com/docs/en/sql-reference/statements/alter/#synchronicity-of-alter-queries">Synchronicity of <code class="inline">ALTER</code> Queries</a></li></ul>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -128,17 +134,31 @@ Plausible
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#changeset/2" translate="no">changeset(model, attrs \\ %{})</a>
+          <a href="#delete_imported_stats!/1" translate="no">delete_imported_stats!(site)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Deletes imported stats from Google Analytics.</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#free/1" translate="no">free(attrs \\ %{})</a>
+          <a href="#delete_native_stats!/1" translate="no">delete_native_stats!(site)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Deletes native stats for a site, and clears the <code class="inline">stats_start_date</code> field.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#delete_site!/1" translate="no">delete_site!(site)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Deletes a site and all associated stats.</p></div>
 
       </div>
 
@@ -156,18 +176,16 @@ Plausible
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="changeset/2">
-
-    <span id="changeset/1"></span>
+<section class="detail" id="delete_imported_stats!/1">
 
   <div class="detail-header">
-    <a href="#changeset/2" class="detail-link" title="Link to this function">
+    <a href="#delete_imported_stats!/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">changeset(model, attrs \\ %{})</h1>
+    <h1 class="signature" translate="no">delete_imported_stats!(site)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/subscription.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/purge.ex#L28" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -177,21 +195,25 @@ Functions
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> delete_imported_stats!(<a href="Plausible.Site.html#t:t/0">Plausible.Site.t</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Deletes imported stats from Google Analytics.</p>
   </section>
 </section>
-<section class="detail" id="free/1">
-
-    <span id="free/0"></span>
+<section class="detail" id="delete_native_stats!/1">
 
   <div class="detail-header">
-    <a href="#free/1" class="detail-link" title="Link to this function">
+    <a href="#delete_native_stats!/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">free(attrs \\ %{})</h1>
+    <h1 class="signature" translate="no">delete_native_stats!(site)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/billing/subscription.ex#L44" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/purge.ex#L41" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -201,7 +223,41 @@ Functions
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> delete_native_stats!(<a href="Plausible.Site.html#t:t/0">Plausible.Site.t</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Deletes native stats for a site, and clears the <code class="inline">stats_start_date</code> field.</p>
+  </section>
+</section>
+<section class="detail" id="delete_site!/1">
+
+  <div class="detail-header">
+    <a href="#delete_site!/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">delete_site!(site)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/purge.ex#L16" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> delete_site!(<a href="Plausible.Site.html#t:t/0">Plausible.Site.t</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Deletes a site and all associated stats.</p>
   </section>
 </section>
 
