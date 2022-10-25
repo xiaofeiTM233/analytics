@@ -337,7 +337,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">fetch_and_persist(site, report_request, opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/google/api.ex#L181" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/google/api.ex#L183" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -443,7 +443,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">import_analytics(site, date_range, view_id, auth)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/google/api.ex#L139" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/google/api.ex#L141" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -463,8 +463,9 @@ Functions
 <p>Imports stats from a Google Analytics UA view to a Plausible site.</p><p>This function fetches Google Analytics reports in batches of 7500 per
 request. The batches are then buffered to Clickhouse by the
 <a href="Plausible.Google.Buffer.html"><code class="inline">Plausible.Google.Buffer</code></a> process.</p><p>Requests to Google Analytics can fail, and are retried at most
-5 times. Returns <code class="inline">:ok</code> when importing has finished or
-<code class="inline">{:error, term()}</code> when a request to GA failed too many times.</p><p>Useful links:</p><ul><li><a href="https://plausible.io/docs/google-analytics-import">Feature documentation</a></li><li><a href="https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet#ReportRequest">GA API reference</a></li><li><a href="https://ga-dev-tools.web.app/dimensions-metrics-explorer">GA Dimensions reference</a></li></ul>
+5 times with an exponential backoff. Returns <code class="inline">:ok</code> when
+importing has finished or <code class="inline">{:error, term()}</code> when a request to GA failed too 
+many times.</p><p>Useful links:</p><ul><li><a href="https://plausible.io/docs/google-analytics-import">Feature documentation</a></li><li><a href="https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet#ReportRequest">GA API reference</a></li><li><a href="https://ga-dev-tools.web.app/dimensions-metrics-explorer">GA Dimensions reference</a></li></ul>
   </section>
 </section>
 <section class="detail" id="import_authorize_url/2">
