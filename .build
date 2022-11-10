@@ -106,7 +106,6 @@ PlausibleWeb.AuthView.html
 PlausibleWeb.AuthorizeSiteAccess.html
 PlausibleWeb.AuthorizeSitesApiPlug.html
 PlausibleWeb.AuthorizeStatsApiPlug.html
-PlausibleWeb.AutoAuthPlug.html
 PlausibleWeb.BillingController.html
 PlausibleWeb.BillingView.html
 PlausibleWeb.CRMAuthPlug.html
@@ -119,12 +118,12 @@ PlausibleWeb.ErrorHelpers.html
 PlausibleWeb.ErrorView.html
 PlausibleWeb.Favicon.html
 PlausibleWeb.Firewall.html
+PlausibleWeb.FirstLaunchPlug.html
 PlausibleWeb.FormHelpers.html
 PlausibleWeb.InvitationController.html
 PlausibleWeb.LastSeenPlug.html
 PlausibleWeb.LayoutView.html
 PlausibleWeb.PageController.html
-PlausibleWeb.PageView.html
 PlausibleWeb.RefInspector.html
 PlausibleWeb.RemoteIp.html
 PlausibleWeb.RequireAccountPlug.html
@@ -154,8 +153,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-edcc5d53c1.js
-dist/sidebar_items-e69b6aabe1.js
+dist/search_items-62ae48a5e5.js
+dist/sidebar_items-e0631cbdcf.js
 index.html
 readme.html
 search.html
