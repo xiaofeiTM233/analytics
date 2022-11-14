@@ -73,6 +73,7 @@ Plausible.Stats.FilterSuggestions.html
 Plausible.Stats.Filters.html
 Plausible.Stats.Fragments.html
 Plausible.Stats.Imported.html
+Plausible.Stats.Interval.html
 Plausible.Stats.Props.html
 Plausible.Stats.Query.html
 Plausible.Stats.Timeseries.html
@@ -153,8 +154,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-914800736e.js
-dist/sidebar_items-e19e6b98e1.js
+dist/search_items-15d560b2dc.js
+dist/sidebar_items-b280c38402.js
 index.html
 readme.html
 search.html
