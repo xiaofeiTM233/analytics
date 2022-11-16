@@ -51,6 +51,8 @@ Plausible.SentryFilter.html
 Plausible.Session.CacheStore.html
 Plausible.Session.Salts.html
 Plausible.Session.WriteBuffer.html
+Plausible.Site.Cache.Warmer.html
+Plausible.Site.Cache.html
 Plausible.Site.CustomDomain.html
 Plausible.Site.GoogleAuth.html
 Plausible.Site.ImportedData.html
@@ -154,8 +156,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-15d560b2dc.js
-dist/sidebar_items-b280c38402.js
+dist/search_items-64b647ffde.js
+dist/sidebar_items-24f02d960a.js
 index.html
 readme.html
 search.html
