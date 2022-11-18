@@ -26,9 +26,12 @@ Plausible.ClickhouseEvent.html
 Plausible.ClickhouseRepo.html
 Plausible.ClickhouseSession.html
 Plausible.ConfigHelpers.html
+Plausible.DataCase.html
 Plausible.Event.WriteBuffer.html
+Plausible.Factory.html
 Plausible.Goal.html
 Plausible.Goals.html
+Plausible.Google.Api.Mock.html
 Plausible.Google.Api.html
 Plausible.Google.Buffer.html
 Plausible.Google.HTTP.html
@@ -41,6 +44,7 @@ Plausible.Ingestion.Event.html
 Plausible.Ingestion.Request.html
 Plausible.Mailer.html
 Plausible.OpenTelemetry.Sampler.html
+Plausible.PaddleApi.Mock.html
 Plausible.PromEx.Plugins.PlausibleMetrics.html
 Plausible.PromEx.html
 Plausible.Purge.html
@@ -80,6 +84,8 @@ Plausible.Stats.Props.html
 Plausible.Stats.Query.html
 Plausible.Stats.Timeseries.html
 Plausible.Stats.html
+Plausible.Test.ClickhouseSetup.html
+Plausible.TestUtils.html
 Plausible.Themes.html
 Plausible.Timezones.html
 Plausible.Workers.CheckUsage.html
@@ -113,6 +119,7 @@ PlausibleWeb.BillingController.html
 PlausibleWeb.BillingView.html
 PlausibleWeb.CRMAuthPlug.html
 PlausibleWeb.Captcha.html
+PlausibleWeb.ConnCase.html
 PlausibleWeb.ControllerHelpers.html
 PlausibleWeb.Email.html
 PlausibleWeb.EmailView.html
@@ -156,8 +163,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-f99ba4b841.js
-dist/sidebar_items-230eb53f8e.js
+dist/search_items-0ae7c831e4.js
+dist/sidebar_items-7b338b79f9.js
 index.html
 readme.html
 search.html
