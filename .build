@@ -62,6 +62,7 @@ Plausible.Site.GoogleAuth.html
 Plausible.Site.ImportedData.html
 Plausible.Site.Membership.html
 Plausible.Site.MonthlyReport.html
+Plausible.Site.RateLimiter.html
 Plausible.Site.SharedLink.html
 Plausible.Site.SpikeNotification.html
 Plausible.Site.WeeklyReport.html
@@ -163,8 +164,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-0ae7c831e4.js
-dist/sidebar_items-7b338b79f9.js
+dist/search_items-61101e12fb.js
+dist/sidebar_items-831d7a7505.js
 index.html
 readme.html
 search.html
