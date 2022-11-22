@@ -10,7 +10,7 @@
     <title>Plausible.Stats.Interval — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-831d7a7505.js"></script>
+    <script src="dist/sidebar_items-635fe6ee6b.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -149,16 +149,6 @@ it as a <code class="inline">GROUP BY</code> clause. Possible values are <code c
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#allowed_for_period?/2" translate="no">allowed_for_period?(period, interval)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Returns whether the given interval is valid for a time period.</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
           <a href="#default_for_period/1" translate="no">default_for_period(period)</a>
 
         </div>
@@ -172,6 +162,24 @@ it as a <code class="inline">GROUP BY</code> clause. Possible values are <code c
           <a href="#list/0" translate="no">list()</a>
 
         </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#valid_by_period/0" translate="no">valid_by_period()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#valid_for_period?/2" translate="no">valid_for_period?(period, interval)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns whether the given interval is valid for a time period.</p></div>
 
       </div>
 
@@ -238,44 +246,6 @@ Types
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="allowed_for_period?/2">
-
-  <div class="detail-header">
-    <a href="#allowed_for_period?/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">allowed_for_period?(period, interval)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/interval.ex#L74" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> allowed_for_period?(period(), <a href="#t:t/0">t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
-
-      </div>
-
-<p>Returns whether the given interval is valid for a time period.</p><p>Intervals longer than periods are not supported, e.g. current month stats with
-a month interval, or today stats with a week interval.</p><h2 id="allowed_for_period?/2-examples" class="section-heading">
-  <a href="#allowed_for_period?/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">examples</p>
-  </a>
-  Examples
-</h2>
-<p>  iex&gt; Plausible.Stats.Interval.allowed_for_period?(&quot;month&quot;, &quot;date&quot;)
-  true</p><p>  iex&gt; Plausible.Stats.Interval.allowed_for_period?(&quot;30d&quot;, &quot;month&quot;)
-  false</p><p>  iex&gt; Plausible.Stats.Interval.allowed_for_period?(&quot;realtime&quot;, &quot;week&quot;)
-  false</p>
-  </section>
-</section>
 <section class="detail" id="default_for_period/1">
 
   <div class="detail-header">
@@ -337,6 +307,66 @@ a month interval, or today stats with a week interval.</p><h2 id="allowed_for_pe
       </div>
 
 
+  </section>
+</section>
+<section class="detail" id="valid_by_period/0">
+
+  <div class="detail-header">
+    <a href="#valid_by_period/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">valid_by_period()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/interval.ex#L53" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="valid_for_period?/2">
+
+  <div class="detail-header">
+    <a href="#valid_for_period?/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">valid_for_period?(period, interval)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/interval.ex#L75" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> valid_for_period?(period(), <a href="#t:t/0">t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
+
+      </div>
+
+<p>Returns whether the given interval is valid for a time period.</p><p>Intervals longer than periods are not supported, e.g. current month stats with
+a month interval, or today stats with a week interval.</p><h2 id="valid_for_period?/2-examples" class="section-heading">
+  <a href="#valid_for_period?/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<p>  iex&gt; Plausible.Stats.Interval.valid_for_period?(&quot;month&quot;, &quot;date&quot;)
+  true</p><p>  iex&gt; Plausible.Stats.Interval.valid_for_period?(&quot;30d&quot;, &quot;month&quot;)
+  false</p><p>  iex&gt; Plausible.Stats.Interval.valid_for_period?(&quot;realtime&quot;, &quot;week&quot;)
+  false</p>
   </section>
 </section>
 <section class="detail" id="valid?/1">
