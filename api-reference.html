@@ -10,7 +10,7 @@
     <title>API Reference — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-635fe6ee6b.js"></script>
+    <script src="dist/sidebar_items-c8f2dae0f8.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -378,6 +378,11 @@ maximum size, defined by <code class="inline">max_buffer_size/0</code>.</p></div
     <a href="Plausible.Ingestion.Event.html" translate="no">Plausible.Ingestion.Event</a>
 
   </div>
+
+    <div class="summary-synopsis"><p>This module exposes the <a href="#build_and_buffer/1"><code class="inline">build_and_buffer/1</code></a> function capable of
+turning %Plausible.Ingestion.Request{} into a series of events that in turn
+are uniformly either buffered in batches (to Clickhouse) or dropped
+(e.g. due to spam blocklist) from the processing pipeline.</p></div>
 
 </div>
 <div class="summary-row">
