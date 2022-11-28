@@ -7,10 +7,10 @@
     <meta name="generator" content="ExDoc v0.28.5">
     <meta name="project" content="Plausible v0.0.1">
 
-    <title>Plausible.Site.RateLimiter — Plausible v0.0.1</title>
+    <title>Plausible.Site.Cache.Warmer.All — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-c8f2dae0f8.js"></script>
+    <script src="dist/sidebar_items-d3a83926e5.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -100,28 +100,21 @@ Plausible
 </button>
 
 
-    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache/rate_limiter.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache/warmer/all.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Plausible.Site.RateLimiter</span> 
+  <span translate="no">Plausible.Site.Cache.Warmer.All</span> 
   <small class="app-vsn" translate="no">(Plausible v0.0.1)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Thin wrapper around Hammer for rate limiting domain-specific events
-during the ingestion phase. Currently there are two policies
-on which the <code class="inline">allow/2</code> function operates:</p><ul><li><code class="inline">:allow</code></li><li><code class="inline">:deny</code></li></ul><p>Rate Limiting buckets are configured per site (externally via the CRM).
-See: <a href="Plausible.Site.html"><code class="inline">Plausible.Site</code></a></p><p>To look up each site's configuration, the RateLimiter fetches
-a Site by domain using <code class="inline">Plausible.Cache</code> interface.
-If the Site is not found in Cache, a DB refresh attempt is made.
-The result of that last attempt gets stored in Cache to prevent
-excessive DB queries.</p><p>The module defines two policies outside the regular bucket inspection:</p><ul><li>when the site does not exist in the database: deny</li><li>when the underlying rate limiting mechanism returns
-an internal error: allow</li></ul><p>Each policy computation emits a single telemetry event.
-See: <a href="#policy_telemetry_event/1"><code class="inline">policy_telemetry_event/1</code></a></p>
+<p>A Cache.Warmer adapter that refreshes the Sites Cache fully.
+This module exists only to make it explicit what the warmer
+refreshes, to be used in the supervisor tree.</p>
   </section>
 
 
@@ -141,25 +134,11 @@ See: <a href="#policy_telemetry_event/1"><code class="inline">policy_telemetry_e
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#allow?/2" translate="no">allow?(domain, opts \\ [])</a>
+          <a href="#child_spec/1" translate="no">child_spec(opts)</a>
 
         </div>
 
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#key/1" translate="no">key(domain)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#policy_telemetry_event/1" translate="no">policy_telemetry_event(policy)</a>
-
-        </div>
+          <div class="summary-synopsis"><p>See <a href="Plausible.Site.Cache.Warmer.html#child_spec/1"><code class="inline">Plausible.Site.Cache.Warmer.child_spec/1</code></a>.</p></div>
 
       </div>
 
@@ -177,18 +156,16 @@ See: <a href="#policy_telemetry_event/1"><code class="inline">policy_telemetry_e
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="allow?/2">
-
-    <span id="allow?/1"></span>
+<section class="detail" id="child_spec/1">
 
   <div class="detail-header">
-    <a href="#allow?/2" class="detail-link" title="Link to this function">
+    <a href="#child_spec/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">allow?(domain, opts \\ [])</h1>
+    <h1 class="signature" translate="no">child_spec(opts)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache/rate_limiter.ex#L35" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache/warmer/all.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -198,69 +175,7 @@ Functions
 
   <section class="docstring">
 
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> allow?(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="key/1">
-
-  <div class="detail-header">
-    <a href="#key/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">key(domain)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache/rate_limiter.ex#L40" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> key(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="policy_telemetry_event/1">
-
-  <div class="detail-header">
-    <a href="#policy_telemetry_event/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">policy_telemetry_event(policy)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache/rate_limiter.ex#L45" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> policy_telemetry_event(:allow | :deny) :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
-
-      </div>
-
-
+<p>See <a href="Plausible.Site.Cache.Warmer.html#child_spec/1"><code class="inline">Plausible.Site.Cache.Warmer.child_spec/1</code></a>.</p>
   </section>
 </section>
 

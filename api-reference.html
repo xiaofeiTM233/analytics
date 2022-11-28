@@ -10,7 +10,7 @@
     <title>API Reference — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-c8f2dae0f8.js"></script>
+    <script src="dist/sidebar_items-d3a83926e5.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -391,7 +391,9 @@ are uniformly either buffered in batches (to Clickhouse) or dropped
 
   </div>
 
-    <div class="summary-synopsis"><p>The %Plausible.Ingestion.Request{} struct stores all needed fields to create an event downstream.</p></div>
+    <div class="summary-synopsis"><p>The %Plausible.Ingestion.Request{} struct stores all needed fields
+to create an event downstream. Pre-eliminary validation is made
+to detect user errors early.</p></div>
 
 </div>
 <div class="summary-row">
@@ -525,9 +527,42 @@ After each run the process is hibernated, triggering garbage collection.</p></di
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Plausible.Site.Cache.Warmer.All.html" translate="no">Plausible.Site.Cache.Warmer.All</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>A Cache.Warmer adapter that refreshes the Sites Cache fully.
+This module exists only to make it explicit what the warmer
+refreshes, to be used in the supervisor tree.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Site.Cache.Warmer.RecentlyUpdated.html" translate="no">Plausible.Site.Cache.Warmer.RecentlyUpdated</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>A Cache.Warmer adapter that only refreshes the Cache
+with recently updated sites every 30 seconds.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Plausible.Site.CustomDomain.html" translate="no">Plausible.Site.CustomDomain</a>
 
   </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Plausible.Site.GateKeeper.html" translate="no">Plausible.Site.GateKeeper</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Thin wrapper around Hammer for gate keeping domain-specific events
+during the ingestion phase. When the site is allowed, gate keeping
+check returns <code class="inline">:allow</code>, otherwise a <code class="inline">:deny</code> tagged tuple is returned
+with one of the following policy markers</p></div>
 
 </div>
 <div class="summary-row">
@@ -558,17 +593,6 @@ After each run the process is hibernated, triggering garbage collection.</p></di
     <a href="Plausible.Site.MonthlyReport.html" translate="no">Plausible.Site.MonthlyReport</a>
 
   </div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Plausible.Site.RateLimiter.html" translate="no">Plausible.Site.RateLimiter</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Thin wrapper around Hammer for rate limiting domain-specific events
-during the ingestion phase. Currently there are two policies
-on which the <code class="inline">allow/2</code> function operates</p></div>
 
 </div>
 <div class="summary-row">

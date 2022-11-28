@@ -10,7 +10,7 @@
     <title>Plausible.Ingestion.Event — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-c8f2dae0f8.js"></script>
+    <script src="dist/sidebar_items-d3a83926e5.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -164,6 +164,22 @@ are uniformly either buffered in batches (to Clickhouse) or dropped
 
       </div>
 
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#telemetry_event_buffered/0" translate="no">telemetry_event_buffered()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#telemetry_event_dropped/0" translate="no">telemetry_event_dropped()</a>
+
+        </div>
+
+      </div>
+
   </div>
 
   </section>
@@ -187,7 +203,7 @@ Types
     </a>
     <h1 class="signature" translate="no">drop_reason()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L21" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -200,7 +216,7 @@ Types
       <div class="specs">
 
           <pre translate="no"><span class="attribute">@type</span> drop_reason() ::
-  :bot | :domain_blocked | :spam_referrer | {:error, <a href="https://hexdocs.pm/ecto/3.8.4/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
+  :bot | :spam_referrer | <a href="Plausible.Site.GateKeeper.html#t:policy/0">Plausible.Site.GateKeeper.policy</a>() | :invalid</pre>
 
       </div>
 
@@ -216,7 +232,7 @@ Types
     </a>
     <h1 class="signature" translate="no">t()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L25" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L27" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -229,6 +245,23 @@ Types
       <div class="specs">
 
           <pre translate="no"><span class="attribute">@type</span> t() :: %Plausible.Ingestion.Event{
+  changeset: %Ecto.Changeset{
+    action: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    constraints: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    empty_values: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    errors: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    filters: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    params: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    prepare: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    repo: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    repo_opts: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    required: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    valid?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    validations: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+  },
   clickhouse_event:
     %Plausible.ClickhouseEvent{
       __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
@@ -295,7 +328,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">build_and_buffer(request)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L37" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L39" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -308,7 +341,63 @@ Functions
       <div class="specs">
 
           <pre translate="no"><span class="attribute">@spec</span> build_and_buffer(<a href="Plausible.Ingestion.Request.html#t:t/0">Plausible.Ingestion.Request.t</a>()) ::
-  {:ok, %{dropped: [<a href="#t:t/0">t</a>()], buffered: [<a href="#t:t/0">t</a>()]}}</pre>
+  {:ok, %{buffered: [<a href="#t:t/0">t</a>()], dropped: [<a href="#t:t/0">t</a>()]}}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="telemetry_event_buffered/0">
+
+  <div class="detail-header">
+    <a href="#telemetry_event_buffered/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">telemetry_event_buffered()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L65" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> telemetry_event_buffered() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="telemetry_event_dropped/0">
+
+  <div class="detail-header">
+    <a href="#telemetry_event_dropped/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">telemetry_event_dropped()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/ingestion/event.ex#L70" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> telemetry_event_dropped() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
 
       </div>
 
