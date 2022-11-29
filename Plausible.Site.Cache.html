@@ -10,7 +10,7 @@
     <title>Plausible.Site.Cache — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-d3a83926e5.js"></script>
+    <script src="dist/sidebar_items-2bfea7065c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -210,6 +210,18 @@ queried on each cache refresh.</p><p>Also see tests for more comprehensive examp
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#ready?/1" translate="no">ready?(cache_name \\ :sites_by_domain)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Ensures the cache has non-zero size unless no sites exist.
+Useful for orchestrating app startup to prevent the service
+going up asynchronously with an empty cache.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#refresh_all/1" translate="no">refresh_all(opts \\ [])</a>
 
         </div>
@@ -304,7 +316,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">child_spec(opts)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L61" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L62" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -332,7 +344,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">enabled?()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L171" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L188" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -356,7 +368,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get(domain, opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L142" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L159" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -386,7 +398,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">hit_rate(cache_name \\ :sites_by_domain)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L136" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L153" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -410,7 +422,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">merge(new_items, opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L106" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L123" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -438,7 +450,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">name()</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L58" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L59" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -448,7 +460,45 @@ Functions
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> name() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="ready?/1">
+
+    <span id="ready?/0"></span>
+
+  <div class="detail-header">
+    <a href="#ready?/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">ready?(cache_name \\ :sites_by_domain)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L78" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> ready?(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
+
+      </div>
+
+<p>Ensures the cache has non-zero size unless no sites exist.
+Useful for orchestrating app startup to prevent the service
+going up asynchronously with an empty cache.</p>
   </section>
 </section>
 <section class="detail" id="refresh_all/1">
@@ -462,7 +512,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">refresh_all(opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L72" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L89" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -492,7 +542,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">refresh_updated_recently(opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L88" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L105" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -522,7 +572,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">size(cache_name \\ :sites_by_domain)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L130" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L147" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -546,7 +596,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">telemetry_event_refresh(cache_name \\ :sites_by_domain, mode)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L167" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/cache.ex#L184" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
