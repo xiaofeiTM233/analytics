@@ -113,7 +113,8 @@ Plausible
 
   <section id="moduledoc">
 <p><a href="https://hexdocs.pm/opentelemetry/readme.html#samplers">Custom OpenTelemetry sampler</a>
-implementation that ignores <code class="inline">/api/event</code> traces, while recording 100% of other traces.</p>
+implementation that ignores particular traces to reduce noise. Ingestion
+HTTP requests and queries to Oban tables are ignored, for example.</p>
   </section>
 
 

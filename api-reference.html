@@ -410,7 +410,8 @@ to detect user errors early.</p></div>
   </div>
 
     <div class="summary-synopsis"><p><a href="https://hexdocs.pm/opentelemetry/readme.html#samplers">Custom OpenTelemetry sampler</a>
-implementation that ignores <code class="inline">/api/event</code> traces, while recording 100% of other traces.</p></div>
+implementation that ignores particular traces to reduce noise. Ingestion
+HTTP requests and queries to Oban tables are ignored, for example.</p></div>
 
 </div>
 <div class="summary-row">
