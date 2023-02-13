@@ -22,6 +22,7 @@ Plausible.Billing.PaddleApi.html
 Plausible.Billing.Plans.html
 Plausible.Billing.SiteLocker.html
 Plausible.Billing.html
+Plausible.ChangesetHelpers.html
 Plausible.ClickhouseEvent.html
 Plausible.ClickhouseRepo.html
 Plausible.ClickhouseSession.html
@@ -171,8 +172,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-4120b51f21.js
-dist/sidebar_items-8089c80e27.js
+dist/search_items-336d2ce0a5.js
+dist/sidebar_items-73fbd1a410.js
 index.html
 readme.html
 search.html
