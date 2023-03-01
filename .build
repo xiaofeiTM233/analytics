@@ -113,7 +113,6 @@ Plausible.Workers.SendEmailReport.html
 Plausible.Workers.SendSiteSetupEmails.html
 Plausible.Workers.SendTrialNotifications.html
 Plausible.Workers.SpikeNotifier.html
-Plausible.Workers.StatsRemoval.html
 Plausible.html
 PlausibleWeb.Api.ExternalController.html
 PlausibleWeb.Api.ExternalSitesController.html
@@ -177,8 +176,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-e9276f1b1e.js
-dist/sidebar_items-e1675b6302.js
+dist/search_items-d324fae162.js
+dist/sidebar_items-67f1a7ed3c.js
 index.html
 readme.html
 search.html
