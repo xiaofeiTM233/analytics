@@ -95,6 +95,7 @@ Plausible.Stats.Interval.html
 Plausible.Stats.Props.html
 Plausible.Stats.Query.html
 Plausible.Stats.Timeseries.html
+Plausible.Stats.Util.html
 Plausible.Stats.html
 Plausible.Test.ClickhouseSetup.html
 Plausible.TestUtils.html
@@ -176,8 +177,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-d28c4d792e.js
-dist/sidebar_items-3786f7d86b.js
+dist/search_items-b1c4be5b66.js
+dist/sidebar_items-ed02276a92.js
 index.html
 readme.html
 search.html
