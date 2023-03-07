@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.28.5">
     <meta name="project" content="Plausible v0.0.1">
 
-    <title>Plausible.Sentry.Client — Plausible v0.0.1</title>
+    <title>Plausible.Stats.Comparisons — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
     <script src="dist/sidebar_items-d187eb9edb.js"></script>
@@ -100,16 +100,22 @@ Plausible
 </button>
 
 
-    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/sentry/client.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Plausible.Sentry.Client</span> 
+  <span translate="no">Plausible.Stats.Comparisons</span> 
   <small class="app-vsn" translate="no">(Plausible v0.0.1)</small>
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>This module provides functions for comparing query periods.</p><p>It allows you to compare a given period with a previous period or with the
+same period from the previous year. For example, you can compare this month's
+main graph with last month or with the same month from last year.</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -121,6 +127,21 @@ Plausible
       Summary
     </h1>
 
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:mode/0" translate="no">mode()</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -128,23 +149,19 @@ Plausible
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#child_spec/0" translate="no">child_spec()</a>
+          <a href="#compare/4" translate="no">compare(site, source_query, mode, now \\ nil)</a>
 
         </div>
-
-          <div class="summary-synopsis"><p>The Sentry.HTTPClient behaviour requires a child spec to be supplied.
-In this case we don't want Sentry to manage our Finch instances, hence it's fed
-with a dummy module for the sake of the contract.</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#post/3" translate="no">post(url, headers, body)</a>
+          <a href="#valid_mode?/2" translate="no">valid_mode?(query, mode)</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/sentry/8.0.6/Sentry.HTTPClient.html#c:post/3"><code class="inline">Sentry.HTTPClient.post/3</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Returns whether the source query and the selected mode support comparisons.</p></div>
 
       </div>
 
@@ -152,6 +169,47 @@ with a dummy module for the sake of the contract.</p></div>
 
   </section>
 
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Types
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:mode/0">
+
+  <div class="detail-header">
+    <a href="#t:mode/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">mode()</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L15" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> mode() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() | nil</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -162,16 +220,18 @@ with a dummy module for the sake of the contract.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="child_spec/0">
+<section class="detail" id="compare/4">
+
+    <span id="compare/3"></span>
 
   <div class="detail-header">
-    <a href="#child_spec/0" class="detail-link" title="Link to this function">
+    <a href="#compare/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">child_spec()</h1>
+    <h1 class="signature" translate="no">compare(site, source_query, mode, now \\ nil)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/sentry/client.ex#L15" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L23" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -181,21 +241,30 @@ Functions
 
   <section class="docstring">
 
-<p>The Sentry.HTTPClient behaviour requires a child spec to be supplied.
-In this case we don't want Sentry to manage our Finch instances, hence it's fed
-with a dummy module for the sake of the contract.</p><p>XXX: Submit a Sentry PR making the child spec callback optional.</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> compare(
+  <a href="Plausible.Site.html#t:t/0">Plausible.Site.t</a>(),
+  <a href="Plausible.Stats.Query.html#t:t/0">Plausible.Stats.Query.t</a>(),
+  <a href="#t:mode/0">mode</a>(),
+  <a href="https://hexdocs.pm/elixir/NaiveDateTime.html#t:t/0">NaiveDateTime.t</a>() | nil
+) :: {:ok, <a href="Plausible.Stats.Query.html#t:t/0">Plausible.Stats.Query.t</a>()} | {:error, :not_supported}</pre>
+
+      </div>
+
+
   </section>
 </section>
-<section class="detail" id="post/3">
+<section class="detail" id="valid_mode?/2">
 
   <div class="detail-header">
-    <a href="#post/3" class="detail-link" title="Link to this function">
+    <a href="#valid_mode?/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">post(url, headers, body)</h1>
+    <h1 class="signature" translate="no">valid_mode?(query, mode)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/sentry/client.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L67" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -205,7 +274,14 @@ with a dummy module for the sake of the contract.</p><p>XXX: Submit a Sentry PR 
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/sentry/8.0.6/Sentry.HTTPClient.html#c:post/3"><code class="inline">Sentry.HTTPClient.post/3</code></a>.</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> valid_mode?(<a href="Plausible.Stats.Query.html#t:t/0">Plausible.Stats.Query.t</a>(), <a href="#t:mode/0">mode</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
+
+      </div>
+
+<p>Returns whether the source query and the selected mode support comparisons.</p><p>For example, the realtime view doesn't support comparisons. Additionally, only
+[&quot;previous_period&quot;, &quot;year_over_year&quot;] are supported.</p>
   </section>
 </section>
 
