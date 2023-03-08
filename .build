@@ -142,7 +142,6 @@ PlausibleWeb.ErrorHelpers.html
 PlausibleWeb.ErrorReportController.html
 PlausibleWeb.ErrorView.html
 PlausibleWeb.Favicon.html
-PlausibleWeb.Firewall.html
 PlausibleWeb.FirstLaunchPlug.html
 PlausibleWeb.FormHelpers.html
 PlausibleWeb.InvitationController.html
@@ -178,8 +177,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-8a741ed22b.js
-dist/sidebar_items-d187eb9edb.js
+dist/search_items-e3aa6ff3f5.js
+dist/sidebar_items-e3ed95f7c6.js
 index.html
 readme.html
 search.html
