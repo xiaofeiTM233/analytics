@@ -10,7 +10,7 @@
     <title>Plausible.TestUtils — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-4fff055d2d.js"></script>
+    <script src="dist/sidebar_items-069fb7f229.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -264,6 +264,14 @@ Plausible
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#to_naive_truncate/1" translate="no">to_naive_truncate(dt)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#use_api_key/1" translate="no">use_api_key(map)</a>
 
         </div>
@@ -315,7 +323,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">await_clickhouse_count(query, expected)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L193" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L221" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -359,7 +367,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">create_events(events)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L82" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L85" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -425,7 +433,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">create_sessions(sessions)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L91" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L97" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -495,7 +503,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">eventually(expectation, wait_time_ms \\ 50, retries \\ 10)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L180" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L208" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -517,7 +525,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">init_session(conn)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L108" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L118" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -539,7 +547,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">log_in(map)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L100" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L110" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -585,7 +593,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">populate_stats(events)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L137" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L147" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -607,7 +615,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">populate_stats(site, events)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L124" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L134" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -629,7 +637,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">relative_time(shifts)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L174" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L194" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -658,6 +666,28 @@ Functions
 
 
       <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="to_naive_truncate/1">
+
+  <div class="detail-header">
+    <a href="#to_naive_truncate/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">to_naive_truncate(dt)</h1>
+
+      <a href="https://github.com/plausible/analytics/blob/main/test/support/test_utils.ex#L200" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
 
   </div>
 
