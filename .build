@@ -25,10 +25,15 @@ Plausible.Billing.SiteLocker.html
 Plausible.Billing.html
 Plausible.ChangesetHelpers.html
 Plausible.ClickhouseEvent.html
+Plausible.ClickhouseEventV2.html
 Plausible.ClickhouseRepo.html
 Plausible.ClickhouseSession.html
+Plausible.ClickhouseSessionV2.html
 Plausible.ConfigHelpers.html
 Plausible.DataCase.html
+Plausible.DataMigration.NumericIDs.html
+Plausible.DataMigration.Repo.html
+Plausible.DataMigration.html
 Plausible.Event.WriteBuffer.html
 Plausible.Factory.html
 Plausible.Geo.html
@@ -177,8 +182,8 @@ dist/html/fonts/remixicon.svg
 dist/html/fonts/remixicon.ttf
 dist/html/fonts/remixicon.woff
 dist/html/fonts/remixicon.woff2
-dist/search_items-bc96a95c57.js
-dist/sidebar_items-069fb7f229.js
+dist/search_items-cd19ba7f65.js
+dist/sidebar_items-e40f0d2902.js
 index.html
 readme.html
 search.html
