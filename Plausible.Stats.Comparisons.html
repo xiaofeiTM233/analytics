@@ -233,7 +233,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">compare(site, source_query, mode, opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L48" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L57" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -264,7 +264,14 @@ the current day. This can be overriden by the <code class="inline">now</code> op
 </h2>
 <ul><li><p><code class="inline">:now</code> - a <a href="https://hexdocs.pm/elixir/NaiveDateTime.html"><code class="inline">NaiveDateTime</code></a> struct with the current date and time. This is
 optional and used for testing purposes.</p></li><li><p><code class="inline">:from</code> - a ISO-8601 date string used when mode is <code class="inline">&quot;custom&quot;</code>.</p></li><li><p><code class="inline">:to</code> - a ISO-8601 date string used when mode is <code class="inline">&quot;custom&quot;</code>. Must be
-after <code class="inline">from</code>.</p></li></ul>
+after <code class="inline">from</code>.</p></li><li><p><code class="inline">:match_day_of_week?</code> - determines whether the comparison query should be
+adjusted to match the day of the week of the source query. When this option
+is set to true, the comparison query is shifted to start on the same day of
+the week as the source query, rather than on the exact same date. For
+example, if the source query starts on Sunday, January 1st, 2023 and the
+<code class="inline">year_over_year</code> comparison query is configured to <code class="inline">match_day_of_week?</code>,
+it will be shifted to start on Sunday, January 2nd, 2022 instead of
+January 1st. Defaults to false.</p></li></ul>
   </section>
 </section>
 <section class="detail" id="valid_mode?/2">
@@ -276,7 +283,7 @@ after <code class="inline">from</code>.</p></li></ul>
     </a>
     <h1 class="signature" translate="no">valid_mode?(query, mode)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L101" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L168" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
