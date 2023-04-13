@@ -24,8 +24,7 @@ import {
 import { navigateToQuery, QueryLink, QueryButton } from "./query";
 import { shouldIgnoreKeypress } from "./keybinding.js"
 import { COMPARISON_DISABLED_PERIODS, toggleComparisons, isComparisonEnabled } from "../dashboard/comparison-input.js"
-import classNames from "classnames"
-import dayjs from '"ayjs"
+import dayjs from "dayjs"
 
 function renderArrow(query, site, period, prevDate, nextDate) {
   const insertionDate = parseUTCDate(site.statsBegin);
@@ -375,7 +374,7 @@ function DatePicker({query, site, history}) {
             options={{
               mode: 'range',
               maxDate: 'today',
-              minDate: parseUTCDate(site.statsBegin),
+              minDate: site.statsBegin,
               showMonths: 1,
               static: true,
               animate: true}}
