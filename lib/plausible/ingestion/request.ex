@@ -155,7 +155,7 @@ defmodule Plausible.Ingestion.Request do
     raw_props =
       request_body["m"] || request_body["meta"] || request_body["p"] || request_body["props"]
 
-    case decode_raw_props(raw_props) do
+    case maybe_decode_json(raw_props) do
       {:ok, parsed_json} ->
         parsed_json
         |> Enum.filter(&valid_prop_value?/1)
@@ -166,19 +166,19 @@ defmodule Plausible.Ingestion.Request do
     end
   end
 
-  defp decode_raw_props(props) when is_map(props), do: {:ok, props}
+  defp maybe_decode_json(raw) when is_map(raw), do: {:ok, raw}
 
-  defp decode_raw_props(raw_json) when is_binary(raw_json) do
-    case Jason.decode(raw_json) do
-      {:ok, parsed_props} when is_map(parsed_props) ->
-        {:ok, parsed_props}
+  defp maybe_decode_json(raw) when is_binary(raw) do
+    case Jason.decode(raw) do
+      {:ok, parsed} when is_map(parsed) ->
+        {:ok, parsed}
 
       _ ->
         :not_a_map
     end
   end
 
-  defp decode_raw_props(_), do: :bad_format
+  defp maybe_decode_json(_), do: :bad_format
 
   defp valid_prop_value?({key, value}) do
     case {key, value} do
@@ -192,15 +192,12 @@ defmodule Plausible.Ingestion.Request do
 
   @valid_currencies Plausible.Goal.valid_currencies()
   defp parse_monetary_value(request_body) do
-    case request_body do
-      %{"monetary_value" => %{"amount" => amount, "currency" => currency}}
-      when is_float(amount) and currency in @valid_currencies ->
-        Money.from_float!(currency, amount)
-
-      %{"monetary_value" => %{"amount" => amount, "currency" => currency}}
-      when is_integer(amount) and currency in @valid_currencies ->
-        Money.from_float!(currency, amount * 1.0)
-
+    with %{"monetary_value" => monetary_value} <- request_body,
+         {:ok, monetary_value} <- maybe_decode_json(monetary_value),
+         %{"amount" => amount, "currency" => currency}
+         when is_number(amount) and currency in @valid_currencies <- monetary_value do
+      Money.from_float!(currency, amount * 1.0)
+    else
       _any ->
         nil
     end

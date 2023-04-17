@@ -99,7 +99,7 @@ ch_db_url =
   |> get_var_from_path_or_env("CLICKHOUSE_MAX_BUFFER_SIZE", "10000")
   |> Integer.parse()
 
-v2_migration_done = get_var_from_path_or_env(config_dir, "V2_MIGRATION_DONE")
+v2_migration_done = !!get_var_from_path_or_env(config_dir, "V2_MIGRATION_DONE")
 
 ### Mandatory params End
 

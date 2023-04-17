@@ -212,11 +212,13 @@ defmodule Plausible.Ingestion.Event do
     monetary_goals = Plausible.Site.Cache.get(event.domain).monetary_goals || []
 
     matching_goal =
-      Enum.find(monetary_goals, &(&1.event_name == event.clickhouse_event_attrs.event_name))
+      Enum.find(monetary_goals, &(&1.event_name == event.clickhouse_event_attrs.name))
 
-    with %Plausible.Goal{} <- matching_goal,
-         %Money{} <- event.monetary_value,
-         {:ok, %Money{} = converted} <- Money.to_currency(event.monetary_value, matching_goal.currency) do
+    with true <- Plausible.v2?(),
+         %Plausible.Goal{} <- matching_goal,
+         %Money{} <- event.request.monetary_value,
+         {:ok, %Money{} = converted} <-
+           Money.to_currency(event.request.monetary_value, matching_goal.currency) do
       monetary_value =
         converted
         |> Money.to_decimal()

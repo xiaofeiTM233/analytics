@@ -158,6 +158,21 @@ defmodule Plausible.Ingestion.RequestTest do
     assert request.props["custom2"] == "property2"
   end
 
+  test "parses monetary value field from a json string" do
+    payload = %{
+      name: "pageview",
+      domain: "dummy.site",
+      url: "http://dummy.site/index.html",
+      monetary_value: "{\"amount\":20.2,\"currency\":\"EUR\"}"
+    }
+
+    conn = build_conn(:post, "/api/events", payload)
+
+    assert {:ok, request} = Request.build(conn)
+    assert %Money{amount: amount, currency: :EUR} = request.monetary_value
+    assert Decimal.new("20.2") == amount
+  end
+
   test "sets monetary value with integer amount" do
     payload = %{
       name: "pageview",
