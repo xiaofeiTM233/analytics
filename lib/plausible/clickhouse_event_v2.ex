@@ -36,6 +36,8 @@ defmodule Plausible.ClickhouseEventV2 do
 
     field :"meta.key", {:array, :string}
     field :"meta.value", {:array, :string}
+    field :monetary_value, Ch.Types.Float64
+
     field :transferred_from, :string
   end
 
@@ -67,7 +69,8 @@ defmodule Plausible.ClickhouseEventV2 do
         :city_geoname_id,
         :screen_size,
         :"meta.key",
-        :"meta.value"
+        :"meta.value",
+        :monetary_value
       ],
       empty_values: [nil, ""]
     )
