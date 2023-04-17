@@ -226,8 +226,7 @@ defmodule Plausible.Ingestion.Event do
 
       update_attrs(event, %{monetary_value: monetary_value})
     else
-      _ ->
-        event
+      _ -> event
     end
   end
 

@@ -683,6 +683,70 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       assert Map.get(event, :"meta.value") == ["true"]
     end
 
+    @tag :v2_only
+    test "converts monetary values into the goal currency", %{conn: conn, site: site} do
+      params = %{
+        name: "Payment",
+        url: "http://gigride.live/",
+        domain: site.domain,
+        monetary_value: %{amount: 10.2, currency: "USD"}
+      }
+
+      insert(:goal, event_name: "Payment", currency: "BRL", site: site)
+
+      assert %{status: 202} = post(conn, "/api/event", params)
+      assert %{monetary_value: 7.14} = get_event(site)
+    end
+
+    @tag :v2_only
+    test "saves the exact same amount when goal currency is the same as the event", %{
+      conn: conn,
+      site: site
+    } do
+      params = %{
+        name: "Payment",
+        url: "http://gigride.live/",
+        domain: site.domain,
+        monetary_value: %{amount: 10, currency: "BRL"}
+      }
+
+      insert(:goal, event_name: "Payment", currency: "BRL", site: site)
+
+      assert %{status: 202} = post(conn, "/api/event", params)
+      assert %{monetary_value: 10.0} = get_event(site)
+    end
+
+    @tag :v2_only
+    test "does not fail when monetary value is invalid", %{conn: conn, site: site} do
+      params = %{
+        name: "Payment",
+        url: "http://gigride.live/",
+        domain: site.domain,
+        monetary_value: %{amount: "1831d", currency: "ADSIE"}
+      }
+
+      insert(:goal, event_name: "Payment", currency: "BRL", site: site)
+
+      assert %{status: 202} = post(conn, "/api/event", params)
+      assert %{monetary_value: 0.0} = get_event(site)
+    end
+
+    @tag :v2_only
+    test "does not save monetary value if no goal matches", %{conn: conn, site: site} do
+      params = %{
+        name: "Add to Cart",
+        url: "http://gigride.live/",
+        domain: site.domain,
+        monetary_value: %{amount: 10.2, currency: "USD"}
+      }
+
+      insert(:goal, event_name: "Checkout", currency: "BRL", site: site)
+      insert(:goal, event_name: "Payment", currency: "USD", site: site)
+
+      assert %{status: 202} = post(conn, "/api/event", params)
+      assert %{monetary_value: 0.0} = get_event(site)
+    end
+
     test "ignores a malformed referrer URL", %{conn: conn, site: site} do
       params = %{
         name: "pageview",
