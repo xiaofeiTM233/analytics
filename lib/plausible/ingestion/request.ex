@@ -19,6 +19,7 @@ defmodule Plausible.Ingestion.Request do
     field :hash_mode, :string
     field :pathname, :string
     field :props, :map
+    field :monetary_value, :map
     field :query_params, :map
 
     field :timestamp, :naive_datetime
@@ -89,7 +90,8 @@ defmodule Plausible.Ingestion.Request do
       event_name: request_body["n"] || request_body["name"],
       referrer: request_body["r"] || request_body["referrer"],
       hash_mode: request_body["h"] || request_body["hashMode"],
-      props: parse_props(request_body)
+      props: parse_props(request_body),
+      monetary_value: parse_monetary_value(request_body)
     )
   end
 
@@ -185,6 +187,22 @@ defmodule Plausible.Ingestion.Request do
       {_key, value} when is_list(value) -> false
       {_key, value} when is_map(value) -> false
       {_key, _value} -> true
+    end
+  end
+
+  @valid_currencies Plausible.Goal.valid_currencies()
+  defp parse_monetary_value(request_body) do
+    case request_body do
+      %{"monetary_value" => %{"amount" => amount, "currency" => currency}}
+      when is_float(amount) and currency in @valid_currencies ->
+        Money.from_float!(currency, amount)
+
+      %{"monetary_value" => %{"amount" => amount, "currency" => currency}}
+      when is_integer(amount) and currency in @valid_currencies ->
+        Money.from_float!(currency, amount * 1.0)
+
+      _any ->
+        nil
     end
   end
 

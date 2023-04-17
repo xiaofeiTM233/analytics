@@ -31,6 +31,8 @@ defmodule Plausible.Goal do
     timestamps()
   end
 
+  def valid_currencies, do: Ecto.Enum.dump_values(__MODULE__, :currency)
+
   def changeset(goal, attrs \\ %{}) do
     goal
     |> cast(attrs, [:site_id, :event_name, :page_path, :currency])

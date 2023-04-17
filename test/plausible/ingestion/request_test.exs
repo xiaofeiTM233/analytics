@@ -158,6 +158,76 @@ defmodule Plausible.Ingestion.RequestTest do
     assert request.props["custom2"] == "property2"
   end
 
+  test "sets monetary value with integer amount" do
+    payload = %{
+      name: "pageview",
+      domain: "dummy.site",
+      url: "http://dummy.site/index.html",
+      monetary_value: %{
+        "amount" => 20,
+        "currency" => "USD"
+      }
+    }
+
+    conn = build_conn(:post, "/api/events", payload)
+
+    assert {:ok, request} = Request.build(conn)
+    assert %Money{amount: amount, currency: :USD} = request.monetary_value
+    assert Decimal.new("20.0") == amount
+  end
+
+  test "sets monetary value with float amount" do
+    payload = %{
+      name: "pageview",
+      domain: "dummy.site",
+      url: "http://dummy.site/index.html",
+      monetary_value: %{
+        "amount" => 20.1,
+        "currency" => "USD"
+      }
+    }
+
+    conn = build_conn(:post, "/api/events", payload)
+
+    assert {:ok, request} = Request.build(conn)
+    assert %Money{amount: amount, currency: :USD} = request.monetary_value
+    assert Decimal.new("20.1") == amount
+  end
+
+  test "does not set invalid monetary value" do
+    payload = %{
+      name: "pageview",
+      domain: "dummy.site",
+      url: "http://dummy.site/index.html",
+      monetary_value: %{
+        "amount" => "12.3",
+        "currency" => "USD"
+      }
+    }
+
+    conn = build_conn(:post, "/api/events", payload)
+
+    assert {:ok, request} = Request.build(conn)
+    refute request.monetary_value
+  end
+
+  test "does not set monetary value ewhen currency invalid" do
+    payload = %{
+      name: "pageview",
+      domain: "dummy.site",
+      url: "http://dummy.site/index.html",
+      monetary_value: %{
+        "amount" => 1233.2,
+        "currency" => "EEEE"
+      }
+    }
+
+    conn = build_conn(:post, "/api/events", payload)
+
+    assert {:ok, request} = Request.build(conn)
+    refute request.monetary_value
+  end
+
   test "pathname is set" do
     payload = %{
       name: "pageview",
