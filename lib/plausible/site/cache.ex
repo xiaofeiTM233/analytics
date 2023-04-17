@@ -51,11 +51,11 @@ defmodule Plausible.Site.Cache do
   @modes [:all, :updated_recently]
 
   @cached_schema_fields ~w(
-     id
-     domain
-     domain_changed_from
-     ingest_rate_limit_scale_seconds
-     ingest_rate_limit_threshold
+    id
+    domain
+    domain_changed_from
+    ingest_rate_limit_scale_seconds
+    ingest_rate_limit_threshold
    )a
 
   @type t() :: Site.t()
@@ -92,17 +92,9 @@ defmodule Plausible.Site.Cache do
 
   @spec refresh_all(Keyword.t()) :: :ok
   def refresh_all(opts \\ []) do
-    sites_by_domain_query =
-      from s in Site,
-        select: {
-          s.domain,
-          s.domain_changed_from,
-          %{struct(s, ^@cached_schema_fields) | from_cache?: true}
-        }
-
     refresh(
       :all,
-      sites_by_domain_query,
+      sites_by_domain_query(),
       Keyword.put(opts, :delete_stale_items?, true)
     )
   end
@@ -110,20 +102,26 @@ defmodule Plausible.Site.Cache do
   @spec refresh_updated_recently(Keyword.t()) :: :ok
   def refresh_updated_recently(opts \\ []) do
     recently_updated_sites_query =
-      from s in Site,
+      from s in sites_by_domain_query(),
         order_by: [asc: s.updated_at],
-        where: s.updated_at > ago(^15, "minute"),
-        select: {
-          s.domain,
-          s.domain_changed_from,
-          %{struct(s, ^@cached_schema_fields) | from_cache?: true}
-        }
+        where: s.updated_at > ago(^15, "minute")
 
     refresh(
       :updated_recently,
       recently_updated_sites_query,
       Keyword.put(opts, :delete_stale_items?, false)
     )
+  end
+
+  defp sites_by_domain_query do
+    from s in Site,
+      left_join: mg in assoc(s, :monetary_goals),
+      select: {
+        s.domain,
+        s.domain_changed_from,
+        %{struct(s, ^@cached_schema_fields) | from_cache?: true}
+      },
+      preload: [monetary_goals: mg]
   end
 
   @spec merge(new_items :: [Site.t()], opts :: Keyword.t()) :: :ok
