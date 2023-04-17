@@ -24,6 +24,8 @@ defmodule Plausible.Goal do
     field :event_name, :string
     field :page_path, :string
 
+    field :currency, Ecto.Enum, values: Money.Currency.known_current_currencies()
+
     belongs_to :site, Plausible.Site
 
     timestamps()
@@ -31,12 +33,13 @@ defmodule Plausible.Goal do
 
   def changeset(goal, attrs \\ %{}) do
     goal
-    |> cast(attrs, [:site_id, :event_name, :page_path])
+    |> cast(attrs, [:site_id, :event_name, :page_path, :currency])
     |> validate_required([:site_id])
     |> cast_assoc(:site)
     |> validate_event_name_and_page_path()
     |> update_change(:event_name, &String.trim/1)
     |> update_change(:page_path, &String.trim/1)
+    |> maybe_drop_currency()
   end
 
   defp validate_event_name_and_page_path(changeset) do
@@ -57,5 +60,13 @@ defmodule Plausible.Goal do
   defp validate_event_name(changeset) do
     value = get_field(changeset, :event_name)
     value && String.match?(value, ~r/^.+/)
+  end
+
+  defp maybe_drop_currency(changeset) do
+    if get_field(changeset, :page_path) do
+      delete_change(changeset, :currency)
+    else
+      changeset
+    end
   end
 end
