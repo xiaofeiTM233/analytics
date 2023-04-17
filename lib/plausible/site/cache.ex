@@ -188,7 +188,7 @@ defmodule Plausible.Site.Cache do
     query = from s in sites_by_domain_query(), where: s.domain == ^domain
 
     case Plausible.Repo.one(query) do
-      {_, _, site} -> site
+      {_, _, site} -> %Site{site | from_cache?: false}
       _any -> nil
     end
   end
