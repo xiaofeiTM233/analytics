@@ -56,11 +56,6 @@ export default class Conversions extends React.Component {
     }
   }
 
-  getBarMaxWidth() {
-    const { viewport } = this.state;
-    return viewport > MOBILE_UPPER_WIDTH ? "16rem" : "10rem";
-  }
-
   fetchConversions() {
     api.get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/conversions`, this.props.query)
       .then((res) => this.setState({loading: false, goals: res, prevHeight: null}))
@@ -77,7 +72,6 @@ export default class Conversions extends React.Component {
             count={goal.unique_conversions}
             all={this.state.goals}
             bg="bg-red-50 dark:bg-gray-500 dark:bg-opacity-15"
-            maxWidthDeduction={this.getBarMaxWidth()}
             plot="unique_conversions"
           >
             <Link to={url.setQuery('goal', escapeFilterValue(goal.name))} className="block px-2 py-1.5 hover:underline relative z-9 break-all lg:truncate dark:text-gray-200">{goal.name}</Link>
@@ -86,6 +80,9 @@ export default class Conversions extends React.Component {
             <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.unique_conversions)}</span>
             {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.total_conversions)}</span>}
             <span className="inline-block w-20 font-medium text-right">{goal.conversion_rate}%</span>
+            {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.average_value)}</span>}
+            {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.total_value)}</span>}
+
           </div>
         </div>
         { renderProps && <PropBreakdown site={this.props.site} query={this.props.query} goal={goal} /> }
@@ -107,6 +104,8 @@ export default class Conversions extends React.Component {
               <span className="inline-block w-20">Uniques</span>
               {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20">Total</span>}
               <span className="inline-block w-20">CR</span>
+              {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20">Avg value</span>}
+              {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20">Total value</span>}
             </div>
           </div>
           <FlipMove>

@@ -22,6 +22,13 @@ defmodule Plausible.Stats.Breakdown do
 
     trace(query, property, metrics)
 
+    metrics =
+      if Plausible.v2?() && Enum.any?(event_goals, & &1.currency) do
+        metrics ++ [:average_value, :total_value]
+      else
+        metrics
+      end
+
     event_results =
       if Enum.any?(event_goals) do
         breakdown(site, event_query, "event:name", metrics, pagination)
@@ -29,6 +36,11 @@ defmodule Plausible.Stats.Breakdown do
       else
         []
       end
+
+    event_results =
+      Enum.map(event_results, fn event_result ->
+        maybe_update_monetary_metrics(event_result, event_goals)
+      end)
 
     {limit, page} = pagination
     offset = (page - 1) * limit
@@ -155,6 +167,31 @@ defmodule Plausible.Stats.Breakdown do
     trace(query, property, metrics)
     breakdown_sessions(site, query, property, metrics, pagination)
   end
+
+  defp maybe_update_monetary_metrics(
+         %{average_value: _, total_value: _} = event_result,
+         event_goals
+       ) do
+    case Enum.find(event_goals, fn goal ->
+           goal.event_name == event_result.goal && goal.currency
+         end) do
+      nil ->
+        %{event_result | average_value: nil, total_value: nil}
+
+      monetary_goal ->
+        total_value =
+          Money.new!(monetary_goal.currency, Decimal.from_float(event_result.total_value))
+          |> Money.to_string!()
+
+        average_value =
+          Money.new!(monetary_goal.currency, Decimal.from_float(event_result.average_value))
+          |> Money.to_string!()
+
+        %{event_result | total_value: total_value, average_value: average_value}
+    end
+  end
+
+  defp maybe_update_monetary_metrics(event_result, _), do: event_result
 
   defp zip_results(event_result, session_result, property, metrics) do
     sort_by = if Enum.member?(metrics, :visitors), do: :visitors, else: List.first(metrics)
