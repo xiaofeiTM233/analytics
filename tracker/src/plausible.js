@@ -76,6 +76,12 @@
     if (options && options.props) {
       payload.p = options.props
     }
+    if (options && options.monetary_value) {
+      payload.$ = {
+        currency: options.monetary_value.currency,
+        amount: options.monetary_value.amount
+      }
+    }
 
     {{#if pageview_props}}
     var propAttributes = scriptEl.getAttributeNames().filter(function (name) {

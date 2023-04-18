@@ -191,7 +191,7 @@ defmodule Plausible.Ingestion.Request do
   end
 
   defp put_monetary_value(%Ecto.Changeset{} = changeset, %{} = request_body) do
-    with %{"monetary_value" => monetary_value} <- request_body,
+    with monetary_value <- request_body["monetary_value"] || request_body["$"],
          {:ok, %{"amount" => _, "currency" => _} = monetary_value} <-
            maybe_decode_json(monetary_value) do
       parse_monetary_value(changeset, monetary_value)

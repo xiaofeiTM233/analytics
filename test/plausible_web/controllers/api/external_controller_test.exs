@@ -701,6 +701,23 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
     end
 
     @tag :v2_only
+    test "monetary values can be sent with minified keys", %{conn: conn, site: site} do
+      params = %{
+        "n" => "Payment",
+        "u" => "http://gigride.live/",
+        "d" => site.domain,
+        "$" => Jason.encode!(%{amount: 10.2, currency: "USD"})
+      }
+
+      insert(:goal, event_name: "Payment", currency: "BRL", site: site)
+
+      assert %{status: 202} = post(conn, "/api/event", params)
+      assert %{monetary_value: amount} = get_event(site)
+
+      assert Decimal.equal?(Decimal.new("7.14"), amount)
+    end
+
+    @tag :v2_only
     test "saves the exact same amount when goal currency is the same as the event", %{
       conn: conn,
       site: site
