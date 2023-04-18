@@ -695,7 +695,9 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: 7.14} = get_event(site)
+      assert %{monetary_value: amount} = get_event(site)
+
+      assert Decimal.equal?(Decimal.new("7.14"), amount)
     end
 
     @tag :v2_only
@@ -713,7 +715,9 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: 10.0} = get_event(site)
+      assert %{monetary_value: amount} = get_event(site)
+
+      assert Decimal.equal?(Decimal.new("10.0"), amount)
     end
 
     @tag :v2_only
@@ -728,7 +732,9 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: 0.0} = get_event(site)
+      assert %{monetary_value: amount} = get_event(site)
+
+      assert Decimal.equal?(Decimal.new("0.0"), amount)
     end
 
     @tag :v2_only
@@ -744,7 +750,9 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       insert(:goal, event_name: "Payment", currency: "USD", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: 0.0} = get_event(site)
+      assert %{monetary_value: amount} = get_event(site)
+
+      assert Decimal.equal?(Decimal.new("0.0"), amount)
     end
 
     test "ignores a malformed referrer URL", %{conn: conn, site: site} do

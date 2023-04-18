@@ -36,7 +36,7 @@ defmodule Plausible.ClickhouseEventV2 do
 
     field :"meta.key", {:array, :string}
     field :"meta.value", {:array, :string}
-    field :monetary_value, Ch.Types.Float64
+    field :monetary_value, Ch.Types.Decimal64, scale: 4
 
     field :transferred_from, :string
   end
