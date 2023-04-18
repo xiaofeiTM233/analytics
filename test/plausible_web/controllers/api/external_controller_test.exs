@@ -721,7 +721,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
     end
 
     @tag :v2_only
-    test "does not fail when monetary value is invalid", %{conn: conn, site: site} do
+    test "fails when monetary value is invalid", %{conn: conn, site: site} do
       params = %{
         name: "Payment",
         url: "http://gigride.live/",
@@ -731,10 +731,11 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
 
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
-      assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: amount} = get_event(site)
+      conn = post(conn, "/api/event", params)
 
-      assert Decimal.equal?(Decimal.new("0.0"), amount)
+      assert json_response(conn, 400) == %{
+               "errors" => %{"monetary_value" => ["currency is not supported or invalid"]}
+             }
     end
 
     @tag :v2_only

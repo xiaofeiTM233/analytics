@@ -188,7 +188,7 @@ defmodule Plausible.Ingestion.RequestTest do
 
     assert {:ok, request} = Request.build(conn)
     assert %Money{amount: amount, currency: :USD} = request.monetary_value
-    assert Decimal.new("20.0") == amount
+    assert Decimal.equal?(amount, Decimal.new("20.0"))
   end
 
   test "sets monetary value with float amount" do
@@ -206,10 +206,10 @@ defmodule Plausible.Ingestion.RequestTest do
 
     assert {:ok, request} = Request.build(conn)
     assert %Money{amount: amount, currency: :USD} = request.monetary_value
-    assert Decimal.new("20.1") == amount
+    assert Decimal.equal?(amount, Decimal.new("20.1"))
   end
 
-  test "does not set invalid monetary value" do
+  test "parses string amounts into money structs" do
     payload = %{
       name: "pageview",
       domain: "dummy.site",
@@ -223,10 +223,11 @@ defmodule Plausible.Ingestion.RequestTest do
     conn = build_conn(:post, "/api/events", payload)
 
     assert {:ok, request} = Request.build(conn)
-    refute request.monetary_value
+    assert %Money{amount: amount, currency: :USD} = request.monetary_value
+    assert Decimal.equal?(amount, Decimal.new("12.3"))
   end
 
-  test "does not set monetary value ewhen currency invalid" do
+  test "rejects the event when currency is invalid" do
     payload = %{
       name: "pageview",
       domain: "dummy.site",
@@ -238,9 +239,8 @@ defmodule Plausible.Ingestion.RequestTest do
     }
 
     conn = build_conn(:post, "/api/events", payload)
-
-    assert {:ok, request} = Request.build(conn)
-    refute request.monetary_value
+    assert {:error, changeset} = Request.build(conn)
+    assert {"currency is not supported or invalid", _} = changeset.errors[:monetary_value]
   end
 
   test "pathname is set" do

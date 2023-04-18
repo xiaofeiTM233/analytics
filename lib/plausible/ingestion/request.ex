@@ -50,6 +50,7 @@ defmodule Plausible.Ingestion.Request do
         |> put_request_params(request_body)
         |> put_pathname()
         |> put_query_params()
+        |> put_monetary_value(request_body)
         |> map_domains(request_body)
         |> Changeset.validate_required([
           :event_name,
@@ -90,8 +91,7 @@ defmodule Plausible.Ingestion.Request do
       event_name: request_body["n"] || request_body["name"],
       referrer: request_body["r"] || request_body["referrer"],
       hash_mode: request_body["h"] || request_body["hashMode"],
-      props: parse_props(request_body),
-      monetary_value: parse_monetary_value(request_body)
+      props: parse_props(request_body)
     )
   end
 
@@ -190,16 +190,37 @@ defmodule Plausible.Ingestion.Request do
     end
   end
 
-  @valid_currencies Plausible.Goal.valid_currencies()
-  defp parse_monetary_value(request_body) do
+  defp put_monetary_value(%Ecto.Changeset{} = changeset, %{} = request_body) do
     with %{"monetary_value" => monetary_value} <- request_body,
-         {:ok, monetary_value} <- maybe_decode_json(monetary_value),
-         %{"amount" => amount, "currency" => currency}
-         when is_number(amount) and currency in @valid_currencies <- monetary_value do
-      Money.from_float!(currency, amount * 1.0)
+         {:ok, %{"amount" => _, "currency" => _} = monetary_value} <-
+           maybe_decode_json(monetary_value) do
+      parse_monetary_value(changeset, monetary_value)
     else
-      _any ->
-        nil
+      _any -> changeset
+    end
+  end
+
+  @valid_currencies Plausible.Goal.valid_currencies()
+  defp parse_monetary_value(changeset, %{"amount" => amount, "currency" => currency}) do
+    with true <- currency in @valid_currencies,
+         {%Decimal{} = amount, _rest} <- parse_decimal(amount),
+         %Money{} = amount <- Money.new(currency, amount) do
+      Changeset.put_change(changeset, :monetary_value, amount)
+    else
+      false ->
+        Changeset.add_error(changeset, :monetary_value, "currency is not supported or invalid")
+
+      _parse_error ->
+        Changeset.add_error(changeset, :monetary_value, "must be a valid number")
+    end
+  end
+
+  defp parse_decimal(value) do
+    case value do
+      value when is_binary(value) -> Decimal.parse(value)
+      value when is_float(value) -> {Decimal.from_float(value), nil}
+      value when is_integer(value) -> {Decimal.new(value), nil}
+      _any -> :error
     end
   end
 
