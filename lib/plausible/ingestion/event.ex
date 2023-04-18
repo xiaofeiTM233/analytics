@@ -99,7 +99,7 @@ defmodule Plausible.Ingestion.Event do
       &put_utm_tags/1,
       &put_geolocation/1,
       &put_props/1,
-      &put_monetary_value/1,
+      &put_revenue/1,
       &put_salts/1,
       &put_user_id/1,
       &validate_clickhouse_event/1,
@@ -208,27 +208,29 @@ defmodule Plausible.Ingestion.Event do
 
   defp put_props(%__MODULE__{} = event), do: event
 
-  def put_monetary_value(event) do
-    monetary_goals = Plausible.Site.Cache.get(event.domain).monetary_goals || []
-
+  defp put_revenue(%__MODULE__{request: %{revenue_source: %Money{} = revenue_source}} = event) do
     matching_goal =
-      Enum.find(monetary_goals, &(&1.event_name == event.clickhouse_event_attrs.name))
+      event.domain
+      |> Plausible.Site.Cache.get()
+      |> Map.get(:monetary_goals)
+      |> Kernel.||([])
+      |> Enum.find(&(&1.event_name == event.clickhouse_event_attrs.name))
 
     with true <- Plausible.v2?(),
-         %Plausible.Goal{} <- matching_goal,
-         %Money{} <- event.request.monetary_value,
-         {:ok, %Money{} = converted} <-
-           Money.to_currency(event.request.monetary_value, matching_goal.currency) do
-      monetary_value =
-        converted
-        |> Money.to_decimal()
-        |> Decimal.to_float()
-
-      update_attrs(event, %{monetary_value: monetary_value})
+         %Plausible.Goal{currency: currency} <- matching_goal,
+         {:ok, %Money{} = revenue_reporting} <- Money.to_currency(revenue_source, currency) do
+      update_attrs(event, %{
+        revenue_source_amount: revenue_source.amount,
+        revenue_source_currency: to_string(revenue_source.currency),
+        revenue_reporting_amount: revenue_reporting.amount,
+        revenue_reporting_currency: to_string(revenue_reporting.currency)
+      })
     else
       _ -> event
     end
   end
+
+  defp put_revenue(event), do: event
 
   defp put_salts(%__MODULE__{} = event) do
     %{event | salts: Plausible.Session.Salts.fetch()}

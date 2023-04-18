@@ -158,27 +158,27 @@ defmodule Plausible.Ingestion.RequestTest do
     assert request.props["custom2"] == "property2"
   end
 
-  test "parses monetary value field from a json string" do
+  test "parses revenue source field from a json string" do
     payload = %{
       name: "pageview",
       domain: "dummy.site",
       url: "http://dummy.site/index.html",
-      monetary_value: "{\"amount\":20.2,\"currency\":\"EUR\"}"
+      revenue: "{\"amount\":20.2,\"currency\":\"EUR\"}"
     }
 
     conn = build_conn(:post, "/api/events", payload)
 
     assert {:ok, request} = Request.build(conn)
-    assert %Money{amount: amount, currency: :EUR} = request.monetary_value
+    assert %Money{amount: amount, currency: :EUR} = request.revenue_source
     assert Decimal.new("20.2") == amount
   end
 
-  test "sets monetary value with integer amount" do
+  test "sets revenue source with integer amount" do
     payload = %{
       name: "pageview",
       domain: "dummy.site",
       url: "http://dummy.site/index.html",
-      monetary_value: %{
+      revenue: %{
         "amount" => 20,
         "currency" => "USD"
       }
@@ -187,16 +187,16 @@ defmodule Plausible.Ingestion.RequestTest do
     conn = build_conn(:post, "/api/events", payload)
 
     assert {:ok, request} = Request.build(conn)
-    assert %Money{amount: amount, currency: :USD} = request.monetary_value
+    assert %Money{amount: amount, currency: :USD} = request.revenue_source
     assert Decimal.equal?(amount, Decimal.new("20.0"))
   end
 
-  test "sets monetary value with float amount" do
+  test "sets revenue source with float amount" do
     payload = %{
       name: "pageview",
       domain: "dummy.site",
       url: "http://dummy.site/index.html",
-      monetary_value: %{
+      revenue: %{
         "amount" => 20.1,
         "currency" => "USD"
       }
@@ -205,7 +205,7 @@ defmodule Plausible.Ingestion.RequestTest do
     conn = build_conn(:post, "/api/events", payload)
 
     assert {:ok, request} = Request.build(conn)
-    assert %Money{amount: amount, currency: :USD} = request.monetary_value
+    assert %Money{amount: amount, currency: :USD} = request.revenue_source
     assert Decimal.equal?(amount, Decimal.new("20.1"))
   end
 
@@ -214,7 +214,7 @@ defmodule Plausible.Ingestion.RequestTest do
       name: "pageview",
       domain: "dummy.site",
       url: "http://dummy.site/index.html",
-      monetary_value: %{
+      revenue: %{
         "amount" => "12.3",
         "currency" => "USD"
       }
@@ -223,7 +223,7 @@ defmodule Plausible.Ingestion.RequestTest do
     conn = build_conn(:post, "/api/events", payload)
 
     assert {:ok, request} = Request.build(conn)
-    assert %Money{amount: amount, currency: :USD} = request.monetary_value
+    assert %Money{amount: amount, currency: :USD} = request.revenue_source
     assert Decimal.equal?(amount, Decimal.new("12.3"))
   end
 
@@ -232,7 +232,7 @@ defmodule Plausible.Ingestion.RequestTest do
       name: "pageview",
       domain: "dummy.site",
       url: "http://dummy.site/index.html",
-      monetary_value: %{
+      revenue: %{
         "amount" => 1233.2,
         "currency" => "EEEE"
       }
@@ -240,7 +240,7 @@ defmodule Plausible.Ingestion.RequestTest do
 
     conn = build_conn(:post, "/api/events", payload)
     assert {:error, changeset} = Request.build(conn)
-    assert {"currency is not supported or invalid", _} = changeset.errors[:monetary_value]
+    assert {"currency is not supported or invalid", _} = changeset.errors[:revenue_source]
   end
 
   test "pathname is set" do

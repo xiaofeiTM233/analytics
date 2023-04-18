@@ -219,8 +219,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
       site: site
     } do
       populate_stats(site, [
-        build(:event, name: "Payment", monetary_value: 25.0),
-        build(:event, name: "Payment", monetary_value: 75.0),
+        build(:event, name: "Payment", revenue_reporting_amount: Decimal.new("25.0")),
+        build(:event, name: "Payment", revenue_reporting_amount: Decimal.new("75.0")),
         build(:event, name: "Payment")
       ])
 

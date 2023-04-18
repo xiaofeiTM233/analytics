@@ -19,7 +19,7 @@ defmodule Plausible.Ingestion.Request do
     field :hash_mode, :string
     field :pathname, :string
     field :props, :map
-    field :monetary_value, :map
+    field :revenue_source, :map
     field :query_params, :map
 
     field :timestamp, :naive_datetime
@@ -50,7 +50,7 @@ defmodule Plausible.Ingestion.Request do
         |> put_request_params(request_body)
         |> put_pathname()
         |> put_query_params()
-        |> put_monetary_value(request_body)
+        |> put_revenue_source(request_body)
         |> map_domains(request_body)
         |> Changeset.validate_required([
           :event_name,
@@ -190,28 +190,28 @@ defmodule Plausible.Ingestion.Request do
     end
   end
 
-  defp put_monetary_value(%Ecto.Changeset{} = changeset, %{} = request_body) do
-    with monetary_value <- request_body["monetary_value"] || request_body["$"],
-         {:ok, %{"amount" => _, "currency" => _} = monetary_value} <-
-           maybe_decode_json(monetary_value) do
-      parse_monetary_value(changeset, monetary_value)
+  defp put_revenue_source(%Ecto.Changeset{} = changeset, %{} = request_body) do
+    with revenue_source <- request_body["revenue"] || request_body["$"],
+         {:ok, %{"amount" => _, "currency" => _} = revenue_source} <-
+           maybe_decode_json(revenue_source) do
+      parse_revenue_source(changeset, revenue_source)
     else
       _any -> changeset
     end
   end
 
   @valid_currencies Plausible.Goal.valid_currencies()
-  defp parse_monetary_value(changeset, %{"amount" => amount, "currency" => currency}) do
+  defp parse_revenue_source(changeset, %{"amount" => amount, "currency" => currency}) do
     with true <- currency in @valid_currencies,
          {%Decimal{} = amount, _rest} <- parse_decimal(amount),
          %Money{} = amount <- Money.new(currency, amount) do
-      Changeset.put_change(changeset, :monetary_value, amount)
+      Changeset.put_change(changeset, :revenue_source, amount)
     else
       false ->
-        Changeset.add_error(changeset, :monetary_value, "currency is not supported or invalid")
+        Changeset.add_error(changeset, :revenue_source, "currency is not supported or invalid")
 
       _parse_error ->
-        Changeset.add_error(changeset, :monetary_value, "must be a valid number")
+        Changeset.add_error(changeset, :revenue_source, "must be a valid number")
     end
   end
 

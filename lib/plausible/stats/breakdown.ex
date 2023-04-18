@@ -180,11 +180,13 @@ defmodule Plausible.Stats.Breakdown do
 
       monetary_goal ->
         total_value =
-          Money.new!(monetary_goal.currency, Decimal.from_float(event_result.total_value))
+          monetary_goal.currency
+          |> Money.new!(Decimal.from_float(event_result.total_value))
           |> Money.to_string!()
 
         average_value =
-          Money.new!(monetary_goal.currency, Decimal.from_float(event_result.average_value))
+          monetary_goal.currency
+          |> Money.new!(Decimal.from_float(event_result.average_value || 0.0))
           |> Money.to_string!()
 
         %{event_result | total_value: total_value, average_value: average_value}

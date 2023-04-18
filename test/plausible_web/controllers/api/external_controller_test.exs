@@ -689,13 +689,13 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
         name: "Payment",
         url: "http://gigride.live/",
         domain: site.domain,
-        monetary_value: %{amount: 10.2, currency: "USD"}
+        revenue: %{amount: 10.2, currency: "USD"}
       }
 
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: amount} = get_event(site)
+      assert %{revenue_reporting_amount: amount} = get_event(site)
 
       assert Decimal.equal?(Decimal.new("7.14"), amount)
     end
@@ -712,7 +712,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: amount} = get_event(site)
+      assert %{revenue_reporting_amount: amount} = get_event(site)
 
       assert Decimal.equal?(Decimal.new("7.14"), amount)
     end
@@ -726,13 +726,13 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
         name: "Payment",
         url: "http://gigride.live/",
         domain: site.domain,
-        monetary_value: %{amount: 10, currency: "BRL"}
+        revenue: %{amount: 10, currency: "BRL"}
       }
 
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: amount} = get_event(site)
+      assert %{revenue_reporting_amount: amount} = get_event(site)
 
       assert Decimal.equal?(Decimal.new("10.0"), amount)
     end
@@ -743,7 +743,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
         name: "Payment",
         url: "http://gigride.live/",
         domain: site.domain,
-        monetary_value: %{amount: "1831d", currency: "ADSIE"}
+        revenue: %{amount: "1831d", currency: "ADSIE"}
       }
 
       insert(:goal, event_name: "Payment", currency: "BRL", site: site)
@@ -751,7 +751,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
       conn = post(conn, "/api/event", params)
 
       assert json_response(conn, 400) == %{
-               "errors" => %{"monetary_value" => ["currency is not supported or invalid"]}
+               "errors" => %{"revenue_source" => ["currency is not supported or invalid"]}
              }
     end
 
@@ -761,14 +761,14 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
         name: "Add to Cart",
         url: "http://gigride.live/",
         domain: site.domain,
-        monetary_value: %{amount: 10.2, currency: "USD"}
+        revenue: %{amount: 10.2, currency: "USD"}
       }
 
       insert(:goal, event_name: "Checkout", currency: "BRL", site: site)
       insert(:goal, event_name: "Payment", currency: "USD", site: site)
 
       assert %{status: 202} = post(conn, "/api/event", params)
-      assert %{monetary_value: amount} = get_event(site)
+      assert %{revenue_reporting_amount: amount} = get_event(site)
 
       assert Decimal.equal?(Decimal.new("0.0"), amount)
     end

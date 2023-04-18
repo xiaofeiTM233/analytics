@@ -346,7 +346,7 @@ defmodule Plausible.Stats.Base do
   def select_event_metrics(q, [:total_value | rest]) do
     from(e in q,
       select_merge: %{
-        total_value: fragment("sum(?) * any(_sample_factor)", e.monetary_value)
+        total_value: fragment("sum(?) * any(_sample_factor)", e.revenue_reporting_amount)
       }
     )
     |> select_event_metrics(rest)
@@ -355,7 +355,12 @@ defmodule Plausible.Stats.Base do
   def select_event_metrics(q, [:average_value | rest]) do
     from(e in q,
       select_merge: %{
-        average_value: fragment("avg(?) * any(_sample_factor)", e.monetary_value)
+        average_value:
+          fragment(
+            "avgIf(?, ? > 0.0) * any(_sample_factor)",
+            e.revenue_reporting_amount,
+            e.revenue_reporting_amount
+          )
       }
     )
     |> select_event_metrics(rest)
