@@ -31,7 +31,18 @@ defmodule Plausible.Goal do
     timestamps()
   end
 
-  def valid_currencies, do: Ecto.Enum.dump_values(__MODULE__, :currency)
+  def valid_currencies do
+    Ecto.Enum.dump_values(__MODULE__, :currency)
+  end
+
+  def currency_options do
+    options =
+      for code <- valid_currencies() do
+        {"#{code} - #{Cldr.Currency.display_name!(code)}", code}
+      end
+
+    [{"", nil}] ++ options
+  end
 
   def changeset(goal, attrs \\ %{}) do
     goal
