@@ -214,7 +214,7 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
     end
 
     @tag :v2_only
-    test "returns formatted average and total values for a conversion with monetary value", %{
+    test "returns formatted average and total values for a conversion with revenue value", %{
       conn: conn,
       site: site
     } do
@@ -242,7 +242,7 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
     end
 
     @tag :v2_only
-    test "returns monetary metrics as nil for non-monetary goals", %{
+    test "returns revenue metrics as nil for non-revenue goals", %{
       conn: conn,
       site: site
     } do
@@ -280,7 +280,7 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
     end
 
     @tag :v2_only
-    test "does not return monetary metrics if no monetary goals are returned", %{
+    test "does not return revenue metrics if no revenue goals are returned", %{
       conn: conn,
       site: site
     } do

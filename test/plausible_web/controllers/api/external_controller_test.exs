@@ -684,7 +684,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
     end
 
     @tag :v2_only
-    test "converts monetary values into the goal currency", %{conn: conn, site: site} do
+    test "converts revenue values into the goal currency", %{conn: conn, site: site} do
       params = %{
         name: "Payment",
         url: "http://gigride.live/",
@@ -701,7 +701,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
     end
 
     @tag :v2_only
-    test "monetary values can be sent with minified keys", %{conn: conn, site: site} do
+    test "revenue values can be sent with minified keys", %{conn: conn, site: site} do
       params = %{
         "n" => "Payment",
         "u" => "http://gigride.live/",
@@ -738,7 +738,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
     end
 
     @tag :v2_only
-    test "fails when monetary value is invalid", %{conn: conn, site: site} do
+    test "fails when revenue value is invalid", %{conn: conn, site: site} do
       params = %{
         name: "Payment",
         url: "http://gigride.live/",
@@ -756,7 +756,7 @@ defmodule PlausibleWeb.Api.ExternalControllerTest do
     end
 
     @tag :v2_only
-    test "does not save monetary value if no goal matches", %{conn: conn, site: site} do
+    test "does not save revenue value if no goal matches", %{conn: conn, site: site} do
       params = %{
         name: "Add to Cart",
         url: "http://gigride.live/",

@@ -659,7 +659,7 @@ defmodule PlausibleWeb.SiteControllerTest do
       assert redirected_to(conn, 302) == "/#{site.domain}/settings/goals"
     end
 
-    test "creates a custom event goal with a monetary value", %{conn: conn, site: site} do
+    test "creates a custom event goal with a revenue value", %{conn: conn, site: site} do
       conn =
         post(conn, "/#{site.domain}/goals", %{
           goal: %{
