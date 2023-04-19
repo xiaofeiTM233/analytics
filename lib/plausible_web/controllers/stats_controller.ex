@@ -297,6 +297,7 @@ defmodule PlausibleWeb.StatsController do
         |> render("stats.html",
           site: shared_link.site,
           has_goals: Sites.has_goals?(shared_link.site),
+          funnels: nil,
           stats_start_date: shared_link.site.stats_start_date,
           title: "Plausible · " <> shared_link.site.domain,
           offer_email_report: false,
