@@ -219,8 +219,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
       site: site
     } do
       populate_stats(site, [
-        build(:event, name: "Payment", revenue_reporting_amount: Decimal.new("25.0")),
-        build(:event, name: "Payment", revenue_reporting_amount: Decimal.new("75.0")),
+        build(:event, name: "Payment", revenue_reporting_amount: Decimal.new("200100300.123")),
+        build(:event, name: "Payment", revenue_reporting_amount: Decimal.new("300100400.123")),
         build(:event, name: "Payment")
       ])
 
@@ -235,8 +235,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
                  "total_conversions" => 3,
                  "prop_names" => nil,
                  "conversion_rate" => 100.0,
-                 "average_revenue" => "€50.00",
-                 "total_revenue" => "€100.00"
+                 "average_revenue" => %{"short" => "€250.1M", "long" => "€250,100,350.12"},
+                 "total_revenue" => %{"short" => "€500.2M", "long" => "€500,200,700.25"}
                }
              ]
     end
@@ -273,8 +273,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
                  "total_conversions" => 1,
                  "prop_names" => nil,
                  "conversion_rate" => 33.3,
-                 "average_revenue" => "€0.00",
-                 "total_revenue" => "€0.00"
+                 "average_revenue" => %{"long" => "€0.00", "short" => "€0.0"},
+                 "total_revenue" => %{"long" => "€0.00", "short" => "€0.0"}
                }
              ]
     end

@@ -80,14 +80,24 @@ export default class Conversions extends React.Component {
             <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.unique_conversions)}</span>
             {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.total_conversions)}</span>}
             <span className="inline-block w-20 font-medium text-right">{goal.conversion_rate}%</span>
-            {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.average_revenue)}</span>}
-            {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{numberFormatter(goal.total_revenue)}</span>}
+            {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{this.renderMoney(goal.average_revenue)}</span>}
+            {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20 font-medium text-right">{this.renderMoney(goal.total_revenue)}</span>}
 
           </div>
         </div>
         { renderProps && <PropBreakdown site={this.props.site} query={this.props.query} goal={goal} /> }
       </div>
     )
+  }
+
+  renderMoney(moneyObject) {
+    if (moneyObject) {
+      return (
+        <span tooltip={moneyObject.long}>{moneyObject.short}</span>
+      )
+    } else {
+      return '-'
+    }
   }
 
   renderInner() {
