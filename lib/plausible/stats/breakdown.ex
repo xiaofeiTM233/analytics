@@ -24,7 +24,7 @@ defmodule Plausible.Stats.Breakdown do
 
     metrics =
       if Plausible.v2?() && Enum.any?(event_goals, & &1.currency) do
-        metrics ++ [:average_value, :total_value]
+        metrics ++ [:average_revenue, :total_revenue]
       else
         metrics
       end
@@ -169,27 +169,27 @@ defmodule Plausible.Stats.Breakdown do
   end
 
   defp maybe_update_monetary_metrics(
-         %{average_value: _, total_value: _} = event_result,
+         %{average_revenue: _, total_revenue: _} = event_result,
          event_goals
        ) do
     case Enum.find(event_goals, fn goal ->
            goal.event_name == event_result.goal && goal.currency
          end) do
       nil ->
-        %{event_result | average_value: nil, total_value: nil}
+        %{event_result | average_revenue: nil, total_revenue: nil}
 
       monetary_goal ->
-        total_value =
+        total_revenue =
           monetary_goal.currency
-          |> Money.new!(Decimal.from_float(event_result.total_value))
+          |> Money.new!(Decimal.from_float(event_result.total_revenue))
           |> Money.to_string!()
 
-        average_value =
+        average_revenue =
           monetary_goal.currency
-          |> Money.new!(Decimal.from_float(event_result.average_value || 0.0))
+          |> Money.new!(Decimal.from_float(event_result.average_revenue || 0.0))
           |> Money.to_string!()
 
-        %{event_result | total_value: total_value, average_value: average_value}
+        %{event_result | total_revenue: total_revenue, average_revenue: average_revenue}
     end
   end
 

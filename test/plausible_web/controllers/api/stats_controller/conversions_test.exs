@@ -235,8 +235,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
                  "total_conversions" => 3,
                  "prop_names" => nil,
                  "conversion_rate" => 100.0,
-                 "average_value" => "€50.00",
-                 "total_value" => "€100.00"
+                 "average_revenue" => "€50.00",
+                 "total_revenue" => "€100.00"
                }
              ]
     end
@@ -264,8 +264,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
                  "total_conversions" => 2,
                  "prop_names" => nil,
                  "conversion_rate" => 66.7,
-                 "average_value" => nil,
-                 "total_value" => nil
+                 "average_revenue" => nil,
+                 "total_revenue" => nil
                },
                %{
                  "name" => "Payment",
@@ -273,8 +273,8 @@ defmodule PlausibleWeb.Api.StatsController.ConversionsTest do
                  "total_conversions" => 1,
                  "prop_names" => nil,
                  "conversion_rate" => 33.3,
-                 "average_value" => "€0.00",
-                 "total_value" => "€0.00"
+                 "average_revenue" => "€0.00",
+                 "total_revenue" => "€0.00"
                }
              ]
     end
