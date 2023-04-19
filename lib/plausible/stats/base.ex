@@ -357,7 +357,7 @@ defmodule Plausible.Stats.Base do
       select_merge: %{
         average_revenue:
           fragment(
-            "if(isNaN(avgIf(?, ? > 0.0), 0.0, avgIf(?, ? > 0.0))) * any(_sample_factor)",
+            "if(isNaN(avgIf(?, ? > 0.0)), 0.0, avgIf(?, ? > 0.0)) * any(_sample_factor)",
             e.revenue_reporting_amount,
             e.revenue_reporting_amount,
             e.revenue_reporting_amount,
