@@ -212,7 +212,7 @@ defmodule Plausible.Ingestion.Event do
     matching_goal =
       event.domain
       |> Plausible.Site.Cache.get()
-      |> Map.get(:monetary_goals)
+      |> Map.get(:revenue_goals)
       |> Kernel.||([])
       |> Enum.find(&(&1.event_name == event.clickhouse_event_attrs.name))
 

@@ -115,13 +115,13 @@ defmodule Plausible.Site.Cache do
 
   defp sites_by_domain_query do
     from s in Site,
-      left_join: mg in assoc(s, :monetary_goals),
+      left_join: mg in assoc(s, :revenue_goals),
       select: {
         s.domain,
         s.domain_changed_from,
         %{struct(s, ^@cached_schema_fields) | from_cache?: true}
       },
-      preload: [monetary_goals: mg]
+      preload: [revenue_goals: mg]
   end
 
   @spec merge(new_items :: [Site.t()], opts :: Keyword.t()) :: :ok

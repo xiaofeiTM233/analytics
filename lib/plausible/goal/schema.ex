@@ -31,6 +31,10 @@ defmodule Plausible.Goal do
     timestamps()
   end
 
+  def revenue?(%__MODULE__{currency: currency}) do
+    !!currency
+  end
+
   def valid_currencies do
     Ecto.Enum.dump_values(__MODULE__, :currency)
   end

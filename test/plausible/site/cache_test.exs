@@ -54,7 +54,7 @@ defmodule Plausible.Site.CacheTest do
     end
 
     @tag :v2_only
-    test "cache caches monetary goals", %{test: test} do
+    test "cache caches revenue goals", %{test: test} do
       {:ok, _} =
         Supervisor.start_link([{Cache, [cache_name: test, child_id: :test_cache_caches_id]}],
           strategy: :one_for_one,
@@ -70,7 +70,7 @@ defmodule Plausible.Site.CacheTest do
 
       {:ok, _} = Plausible.Repo.delete(site)
 
-      assert %Site{from_cache?: true, id: ^site_id, monetary_goals: cached_goals} =
+      assert %Site{from_cache?: true, id: ^site_id, revenue_goals: cached_goals} =
                Cache.get("site1.example.com", force?: true, cache_name: test)
 
       assert [
