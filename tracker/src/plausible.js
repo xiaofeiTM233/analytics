@@ -76,11 +76,8 @@
     if (options && options.props) {
       payload.p = options.props
     }
-    if (options && options.monetary_value) {
-      payload.$ = {
-        currency: options.monetary_value.currency,
-        amount: options.monetary_value.amount
-      }
+    if (options && options.revenue) {
+      payload.$ = { currency: options.revenue.currency, amount: options.revenue.amount }
     }
 
     {{#if pageview_props}}
