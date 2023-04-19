@@ -39,7 +39,7 @@ defmodule Plausible.Stats.Breakdown do
 
     event_results =
       Enum.map(event_results, fn event_result ->
-        maybe_update_monetary_metrics(event_result, event_goals)
+        maybe_update_revenue_metrics(event_result, event_goals)
       end)
 
     {limit, page} = pagination
@@ -168,7 +168,7 @@ defmodule Plausible.Stats.Breakdown do
     breakdown_sessions(site, query, property, metrics, pagination)
   end
 
-  defp maybe_update_monetary_metrics(
+  defp maybe_update_revenue_metrics(
          %{average_revenue: _, total_revenue: _} = event_result,
          event_goals
        ) do
@@ -178,22 +178,20 @@ defmodule Plausible.Stats.Breakdown do
       nil ->
         %{event_result | average_revenue: nil, total_revenue: nil}
 
-      monetary_goal ->
+      revenue_goal ->
         total_revenue =
-          monetary_goal.currency
+          revenue_goal.currency
           |> Money.new!(Decimal.from_float(event_result.total_revenue))
-          |> Money.to_string!()
 
         average_revenue =
-          monetary_goal.currency
+          revenue_goal.currency
           |> Money.new!(Decimal.from_float(event_result.average_revenue || 0.0))
-          |> Money.to_string!()
 
         %{event_result | total_revenue: total_revenue, average_revenue: average_revenue}
     end
   end
 
-  defp maybe_update_monetary_metrics(event_result, _), do: event_result
+  defp maybe_update_revenue_metrics(event_result, _), do: event_result
 
   defp zip_results(event_result, session_result, property, metrics) do
     sort_by = if Enum.member?(metrics, :visitors), do: :visitors, else: List.first(metrics)
