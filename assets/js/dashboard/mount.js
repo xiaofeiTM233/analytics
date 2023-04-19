@@ -16,6 +16,7 @@ if (container) {
     domain: container.dataset.domain,
     offset: container.dataset.offset,
     hasGoals: container.dataset.hasGoals === 'true',
+    funnels: JSON.parse(container.dataset.funnels),
     statsBegin: container.dataset.statsBegin,
     embedded: container.dataset.embedded,
     background: container.dataset.background,
