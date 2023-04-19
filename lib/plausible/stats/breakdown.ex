@@ -17,13 +17,15 @@ defmodule Plausible.Stats.Breakdown do
       |> Goals.for_site()
       |> Enum.split_with(fn goal -> goal.event_name end)
 
+    revenue_goals = Enum.filter(event_goals, &Plausible.Goal.revenue?/1)
+
     events = Enum.map(event_goals, & &1.event_name)
     event_query = %Query{query | filters: Map.put(query.filters, "event:name", {:member, events})}
 
     trace(query, property, metrics)
 
     metrics =
-      if Plausible.v2?() && Enum.any?(event_goals, & &1.currency) do
+      if Plausible.v2?() && !Enum.empty?(revenue_goals) do
         metrics ++ [:average_revenue, :total_revenue]
       else
         metrics
@@ -38,9 +40,11 @@ defmodule Plausible.Stats.Breakdown do
       end
 
     event_results =
-      Enum.map(event_results, fn event_result ->
-        maybe_update_revenue_metrics(event_result, event_goals)
-      end)
+      if Enum.empty?(revenue_goals) do
+        event_results
+      else
+        cast_revenue_metrics_to_money(event_results, revenue_goals)
+      end
 
     {limit, page} = pagination
     offset = (page - 1) * limit
@@ -168,30 +172,21 @@ defmodule Plausible.Stats.Breakdown do
     breakdown_sessions(site, query, property, metrics, pagination)
   end
 
-  defp maybe_update_revenue_metrics(
-         %{average_revenue: _, total_revenue: _} = event_result,
-         event_goals
-       ) do
-    case Enum.find(event_goals, fn goal ->
-           goal.event_name == event_result.goal && goal.currency
-         end) do
-      nil ->
-        %{event_result | average_revenue: nil, total_revenue: nil}
-
-      revenue_goal ->
+  defp cast_revenue_metrics_to_money(event_results, revenue_goals) do
+    for result <- event_results do
+      if matching_goal = Enum.find(revenue_goals, &(&1.event_name == result.goal)) do
         total_revenue =
-          revenue_goal.currency
-          |> Money.new!(Decimal.from_float(event_result.total_revenue))
+          Money.new!(matching_goal.currency, Decimal.from_float(result.total_revenue))
 
         average_revenue =
-          revenue_goal.currency
-          |> Money.new!(Decimal.from_float(event_result.average_revenue || 0.0))
+          Money.new!(matching_goal.currency, Decimal.from_float(result.average_revenue))
 
-        %{event_result | total_revenue: total_revenue, average_revenue: average_revenue}
+        %{result | total_revenue: total_revenue, average_revenue: average_revenue}
+      else
+        %{result | average_revenue: nil, total_revenue: nil}
+      end
     end
   end
-
-  defp maybe_update_revenue_metrics(event_result, _), do: event_result
 
   defp zip_results(event_result, session_result, property, metrics) do
     sort_by = if Enum.member?(metrics, :visitors), do: :visitors, else: List.first(metrics)
